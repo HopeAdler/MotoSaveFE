@@ -4,7 +4,7 @@ import ErrorPage from "../pages/error/ErrorPage";
 import AboutUs from "../pages/guest/AboutUs";
 import Homepage from "../pages/guest/Homepage";
 import GuestLayout from "../pages/layouts/GuestLayout";
-import AdminPageLayout from "../pages/layouts/AdminLAyout";
+import AdminPageLayout from "../pages/layouts/AdminLayout";
 
 export const routes = createBrowserRouter([
   {
