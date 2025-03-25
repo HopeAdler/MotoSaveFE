@@ -12,6 +12,7 @@ import Staffs from "../pages/admin/staffs/Staffs";
 import Stations from "../pages/admin/stations/Stations";
 import StaffsInStations from "../pages/admin/staffsinstations/StaffsInStations";
 import Feedbacks from "../pages/admin/feedbacks/Feedbacks";
+import ProtectedRoute from "../config/ProtectedRoute";
 
 export const routes = createBrowserRouter([
   {
@@ -29,12 +30,16 @@ export const routes = createBrowserRouter([
     ],
   },
   {
-    path: "login",
+    path: "/login",
     element: <Login />,
   },
   {
     path: "/admin",
-    element: <AdminPageLayout />,
+    element: (
+      <ProtectedRoute requiredRoles={["Admin"]}>
+        <AdminPageLayout />
+      </ProtectedRoute>
+    ),
     errorElement: <ErrorPage />,
     children: [
       { index: true, element: <AdminDashboard /> },
