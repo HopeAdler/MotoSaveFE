@@ -3,12 +3,18 @@ import {
   UserOutlined
 } from "@ant-design/icons";
 import { Avatar, Button, Layout, Space, Typography } from "antd";
-import { Link, Outlet } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 import AdminSideNav from "../../components/AdminSideNav";
+import { useContext } from "react";
+import AuthContext from "../../context/AuthContext";
 const { Header, Content, Sider } = Layout;
 const { Title } = Typography;
 
 const AdminPageLayout = () => {
+  const {dispatch} = useContext(AuthContext)
+  const handleLogout = () => {
+    dispatch?.({ type: "LOGOUT"});
+  }
   return (
     <Layout style={{ height: "100vh" }}>
       {/* AVATAR's header */}
@@ -41,8 +47,8 @@ const AdminPageLayout = () => {
         <Header
           className="h-[50px] w-auto bg-white px-[50px] flex justify-between items-center border-b border-gray-300 z-[6]"
         >
-          <Link to="/">
             <Button
+            onClick={handleLogout}
               size={"large"}
               icon={<UploadOutlined style={{ fontSize: "200%" }} />}
               style={{
@@ -56,7 +62,6 @@ const AdminPageLayout = () => {
             >
 
             </Button>
-          </Link>
         </Header>
         <Content className="overflow-initial bg-white p-10">
           <Outlet />
