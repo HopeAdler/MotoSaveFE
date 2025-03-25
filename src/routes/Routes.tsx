@@ -6,6 +6,12 @@ import Homepage from "../pages/guest/Homepage";
 import GuestLayout from "../pages/layouts/GuestLayout";
 import AdminPageLayout from "../pages/layouts/AdminLayout";
 import AdminDashboard from "../pages/admin/AdminDashboard";
+import News from "../pages/guest/News";
+import Services from "../pages/guest/Services";
+import Staffs from "../pages/admin/staffs/Staffs";
+import Stations from "../pages/admin/stations/Stations";
+import StaffsInStations from "../pages/admin/staffsinstations/StaffsInStations";
+import Feedbacks from "../pages/admin/feedbacks/Feedbacks";
 
 export const routes = createBrowserRouter([
   {
@@ -17,8 +23,9 @@ export const routes = createBrowserRouter([
         index: true,
         element: <Homepage />,
       },
-      // { path: "programs", element: <Programs /> },
+      { path: "news", element: <News /> },
       { path: "about-us", element: <AboutUs /> },
+      { path: "services", element: <Services /> },
     ],
   },
   {
@@ -31,10 +38,26 @@ export const routes = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       { index: true, element: <AdminDashboard /> },
-      // {
-      //   path: "dashboard",
-      //   element: <AdminDashboard />,
-      // },
+      {
+        path: "staffs",
+        element: <Staffs />,
+      },
+      {
+        path: "stations",
+        element: <Stations />,
+      },
+      {
+        path: "staffsinstations",
+        element: <StaffsInStations />,
+      },
+      {
+        path: "services",
+        element: <Services />,
+      },
+      {
+        path: "feedbacks",
+        element: <Feedbacks />,
+      },
     ],
   },
 ]);

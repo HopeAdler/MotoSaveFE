@@ -1,22 +1,28 @@
 
-import { useState, useEffect } from "react";
-import { Menu } from "antd";
-import { Link, useLocation } from "react-router-dom";
 import {
-  HomeOutlined,
-  TeamOutlined,
+  BarChartOutlined,
+  OrderedListOutlined,
+  StarOutlined,
+  TeamOutlined
 } from "@ant-design/icons";
+import { Menu } from "antd";
+import { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 
 export default function AdminSideNav() {
   const location = useLocation();
   const selectedKey =
-    location.pathname === "/system-admin/programs"
-      ? "2"
-      : location.pathname === "/system-admin/program-detail"
-        ? "3"
-        : location.pathname === "/system-admin/groups"
-          ? "4"
-          : "1";
+    location.pathname === "/admin/staffs"
+      ? "2.1"
+      : location.pathname === "/admin/stations"
+        ? "2.2"
+        : location.pathname === "/admin/staffsinstations"
+          ? "2.3"
+          : location.pathname === "/admin/services"
+            ? "3"
+            : location.pathname === "/admin/feedbacks"
+              ? "4"
+              : "1";
 
   // Get the initial state of the submenus from sessionStorage
   const [openKeys, setOpenKeys] = useState(
@@ -37,25 +43,23 @@ export default function AdminSideNav() {
   }
 
   const items = [
-    getItem(<Link to="/admin">Thống kê</Link>, "1", <HomeOutlined />, ""),
-    getItem("Quản lý nhân sự", "1.1", <TeamOutlined />, [
-      getItem(<Link to="./staffs">Nhân viên</Link>, "2", "", ""),
-      getItem(<Link to="./stations">Các trạm sửa chữa</Link>, "3", "", ""),
-      getItem(<Link to="./staffInStations">Danh sách nhân viên trong trạm</Link>, "3", "", ""),
+    getItem(<Link to="/admin">Thống kê</Link>, "1", <BarChartOutlined />, ""),
+    getItem("Quản lý nhân sự", "2", <TeamOutlined />, [
+      getItem(<Link to="./staffs">Nhân viên</Link>, "2.1", "", ""),
+      getItem(<Link to="./stations">Các trạm sửa chữa</Link>, "2.2", "", ""),
+      getItem(<Link to="./staffsinstations">Danh sách nhân viên trong trạm</Link>, "2.3", "", ""),
     ]),
-    getItem(<Link to="./services">Quản lí dịch vụ</Link>, "4", <HomeOutlined />, ""),
-    getItem(<Link to="./feedbacks">Feedbacks của khách hàng</Link>, "4", <HomeOutlined />, ""),
+    getItem(<Link to="./services">Quản lí dịch vụ</Link>, "3", <OrderedListOutlined />, ""),
+    getItem(<Link to="./feedbacks">Feedbacks của khách hàng</Link>, "4", <StarOutlined />, ""),
   ];
 
   return (
-    <div>
-      <Menu
-        selectedKeys={[selectedKey]} // set the selected key
-        openKeys={openKeys} // set the open keys
-        onOpenChange={setOpenKeys} // update the open keys when they change
-        mode="inline"
-        items={items}
-      />
-    </div>
+    <Menu
+      selectedKeys={[selectedKey]} // set the selected key
+      openKeys={openKeys} // set the open keys
+      onOpenChange={setOpenKeys} // update the open keys when they change
+      mode="inline"
+      items={items}
+    />
   );
 }
