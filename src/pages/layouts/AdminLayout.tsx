@@ -1,41 +1,24 @@
 import {
-    UploadOutlined,
-    UserOutlined
+    UploadOutlined
 } from "@ant-design/icons";
-import { Avatar, Button, Layout, Space, Typography } from "antd";
+import { Button, Layout } from "antd";
 import { Link, Outlet } from 'react-router-dom';
-import { CContent, CHeader, CSideHeader, CSider } from "../../styles/PageLayouteStyle";
+import AdminHeader from "../../components/AdminHeader";
 import AdminSideNav from "../../components/AdminSideNav";
+import { CContent, CHeader, CSider } from "../../styles/PageLayouteStyle";
 const { Header, Content, Sider } = Layout;
-const { Title } = Typography;
 
 const AdminPageLayout = () => {
     return (
         <Layout style={{ height: "100vh" }}>
             {/* AVATAR's header */}
-            <Header style={CSideHeader}>
-                <Space align="center" size={"small"} direction="horizontal">
-                    <Avatar
-                        shape="square"
-                        size={"large"}
-                        icon={<UserOutlined />}
-                        style={{ marginBottom: 20 }}
-
-                    // src={user?.photos?.[0]?.value}
-                    />
-                    <Title level={4} style={{ marginTop: 0 }}>
-                        {/* {user?.displayName} */}
-
-                    </Title>
-                </Space>
-            </Header>
+            <AdminHeader/>
 
             <Sider style={CSider} width={300}>
                 <AdminSideNav />
             </Sider>
 
             <Layout style={{ marginLeft: 300 }}>
-
 
                 <Header style={CHeader}>
                     <Link to="/">
@@ -51,7 +34,6 @@ const AdminPageLayout = () => {
                                 padding: 0,
                             }}
                         >
-
                         </Button>
                     </Link>
                 </Header>

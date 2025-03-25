@@ -5,6 +5,7 @@ import AboutUs from "../pages/guest/AboutUs";
 import Homepage from "../pages/guest/Homepage";
 import GuestLayout from "../pages/layouts/GuestLayout";
 import AdminPageLayout from "../pages/layouts/AdminLayout";
+import AdminDashboard from "../pages/admin/AdminDashboard";
 
 export const routes = createBrowserRouter([
   {
@@ -28,12 +29,12 @@ export const routes = createBrowserRouter([
     path: "/admin",
     element: <AdminPageLayout />,
     errorElement: <ErrorPage />,
-    // children: [
-    //   // { index: true, element: <HomePage /> },
-    //   {
-    //     path: "dashboard",
-    //     element: <SystemAdminDashboard />,
-    //   },
-    // ],
+    children: [
+      { index: true, element: <AdminDashboard /> },
+      // {
+      //   path: "dashboard",
+      //   element: <AdminDashboard />,
+      // },
+    ],
   },
 ]);
