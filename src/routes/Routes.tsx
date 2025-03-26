@@ -8,11 +8,12 @@ import AdminPageLayout from "../pages/layouts/AdminLayout";
 import AdminDashboard from "../pages/admin/AdminDashboard";
 import News from "../pages/guest/News";
 import Services from "../pages/guest/Services";
-import Staffs from "../pages/admin/staffs/Staffs";
-import Stations from "../pages/admin/stations/Stations";
-import StaffsInStations from "../pages/admin/staffsinstations/StaffsInStations";
+import Stations from "../pages/admin/stations/AllStations";
+import StaffsInStations from "../pages/admin/stations/StaffsInStations";
 import Feedbacks from "../pages/admin/feedbacks/Feedbacks";
 import ProtectedRoute from "../config/ProtectedRoute";
+import AllStaffs from "../pages/admin/staffs/AllStaffs";
+import StationMap from "../pages/admin/stations/StationMap";
 
 export const routes = createBrowserRouter([
   {
@@ -45,15 +46,23 @@ export const routes = createBrowserRouter([
       { index: true, element: <AdminDashboard /> },
       {
         path: "staffs",
-        element: <Staffs />,
+        element: <AllStaffs />,
       },
       {
         path: "stations",
-        element: <Stations />,
-      },
-      {
-        path: "staffsinstations",
-        element: <StaffsInStations />,
+        children: [
+          {
+            index: true, element: <Stations />
+          },
+          {
+            path: "map",
+            element: <StationMap />,
+          },
+          {
+            path: "staffsInStations",
+            element: <StaffsInStations />,
+          },
+        ]
       },
       {
         path: "services",

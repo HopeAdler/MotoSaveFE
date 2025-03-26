@@ -16,8 +16,6 @@ export default function AdminSideNav() {
       ? "2.1"
       : location.pathname === "/admin/stations"
         ? "2.2"
-        : location.pathname === "/admin/staffsinstations"
-          ? "2.3"
           : location.pathname === "/admin/services"
             ? "3"
             : location.pathname === "/admin/feedbacks"
@@ -47,7 +45,6 @@ export default function AdminSideNav() {
     getItem("Quản lý nhân sự", "2", <TeamOutlined />, [
       getItem(<Link to="./staffs">Nhân viên</Link>, "2.1", "", ""),
       getItem(<Link to="./stations">Các trạm sửa chữa</Link>, "2.2", "", ""),
-      getItem(<Link to="./staffsinstations">Danh sách nhân viên trong trạm</Link>, "2.3", "", ""),
     ]),
     getItem(<Link to="./services">Quản lí dịch vụ</Link>, "3", <OrderedListOutlined />, ""),
     getItem(<Link to="./feedbacks">Feedbacks của khách hàng</Link>, "4", <StarOutlined />, ""),

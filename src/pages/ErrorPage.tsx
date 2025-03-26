@@ -1,13 +1,20 @@
-import { Result, Button } from 'antd';
-import { Link } from 'react-router-dom';
+import { Button, Result } from 'antd';
+import { useNavigate } from 'react-router-dom';
 
 const ErrorPage = () => {
+  const nav = useNavigate();
+  const handleGoBack = () => {
+    nav(-1)
+  }
   return (
     <Result
       status="404"
       title="404"
       subTitle="Not found this page."
-      extra={<Link to='/'><Button type="primary">Back Home</Button></Link>}
+      extra={
+        <Button type="primary" onClick={handleGoBack}>
+          Trở lại trang trước
+        </Button>}
     />
   );
 };

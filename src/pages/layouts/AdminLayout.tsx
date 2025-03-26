@@ -64,11 +64,14 @@ const AdminPageLayout = () => {
             </div>
           </Dropdown>
         </Header>
-        <Content className="overflow-initial bg-white p-10">
+
+        {/* Page Content (Fixed Height & Scrollable Inner) */}
+        <Content className="mt-[50px] h-[calc(100vh-50px)] overflow-auto bg-white p-10">
           <Outlet />
         </Content>
       </Layout>
     </Layout>
+
   );
 };
 

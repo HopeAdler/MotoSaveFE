@@ -11,9 +11,11 @@
   },
   "packageManager": "bun@1.2.5",
   "dependencies": {
+    "@goongmaps/goong-map-react": "^1.1.2",
     "@types/react-slick": "^0.23.13",
     "antd": "^5.24.4",
     "axios": "^1.8.4",
+    "dotenv": "^16.4.7",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^7.4.0",
