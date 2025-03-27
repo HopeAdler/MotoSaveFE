@@ -73,12 +73,6 @@ const Feedbacks = () => {
       onFilter: (value: any, record) => record.servicepackagename.indexOf(value) === 0,
       render: (text) => <span>{text}</span>,
     },
-    // {
-    //   title: "Request Type",
-    //   dataIndex: "requesttype",
-    //   key: "requesttype",
-    //   render: (text) => <span className="text-green-500">{text}</span>,
-    // },
     {
       title: "Rating",
       dataIndex: "rating",
