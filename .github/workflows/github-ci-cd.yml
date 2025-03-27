@@ -9,8 +9,10 @@ on:
     branches:
       - main
   pull_request:
+    branches:
+      - main
     types:
-      - closed
+      - merged
 
 jobs:
   Deploy-Production:
