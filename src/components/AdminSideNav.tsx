@@ -12,15 +12,17 @@ import { Link, useLocation } from "react-router-dom";
 export default function AdminSideNav() {
   const location = useLocation();
   const selectedKey =
-    location.pathname === "/admin/staffs"
-      ? "2.1"
-      : location.pathname === "/admin/stations"
-        ? "2.2"
+    location.pathname === "/admin"
+      ? "1"
+      : location.pathname === "/admin/staffs"
+        ? "2.1"
+        : location.pathname === "/admin/stations"
+          ? "2.2"
           : location.pathname === "/admin/services"
             ? "3"
             : location.pathname === "/admin/feedbacks"
               ? "4"
-              : "1";
+              : "0";
 
   // Get the initial state of the submenus from sessionStorage
   const [openKeys, setOpenKeys] = useState(

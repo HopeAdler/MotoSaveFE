@@ -1,6 +1,7 @@
-import { TableColumnsType } from "antd"
+import { Button, TableColumnsType } from "antd"
 import { formatDate } from "../utils/Utils"
-
+import { InfoCircleOutlined } from "@ant-design/icons";
+import { Link } from "react-router-dom";
 export interface Stations {
   id: string,
   name: string,
@@ -54,4 +55,16 @@ export const stationColumns: TableColumnsType<Stations> = [
       formatDate(updateddate)
     )
   },
+  {
+    title: 'Action',
+    dataIndex: '',
+    key: 'x',
+    render: (_item, record) => (
+      <Link to="./stationDetails" state={{ stationId: record.id, stationName: record.name }}>
+        <Button type="primary" className="rounded-full" icon={<InfoCircleOutlined />}>
+        </Button>
+      </Link>
+    ),
+  }
+
 ]

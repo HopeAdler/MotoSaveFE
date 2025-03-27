@@ -1,9 +1,8 @@
-import { Button, Table, TableProps } from "antd";
+import { Empty, Table, TableProps } from "antd";
 import Title from "antd/es/typography/Title";
 import { useEffect, useState } from "react";
 import { stationColumns, Stations } from "../../../models/Stations";
 import { getAllStationss } from "../../../services/beAPIs";
-import { Link } from "react-router-dom";
 
 type TablePaginationConfig = Exclude<
   TableProps<Stations>["pagination"],
@@ -58,11 +57,6 @@ export default function AllStations() {
     <div className="p-6">
       <div className="flex items-center justify-between">
         <Title level={3} className="m-0">Danh sách các trạm</Title>
-        <Button type="link">
-          <Link to="./map">
-            Xem trên bản đồ
-          </Link>
-        </Button>
       </div>
 
       <Table<Stations>
@@ -76,6 +70,10 @@ export default function AllStations() {
         size="large"
         scroll={{ x: "max-content" }}
         className="rounded-lg overflow-hidden shadow-lg p-5"
+        locale={{
+          emptyText:
+            <Empty description="Không có trạm nào (?!)"></Empty>
+        }}
       />
     </div>
   );

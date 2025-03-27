@@ -3,33 +3,55 @@ import { useContext, useState } from "react";
 import AuthContext from "../context/AuthContext";
 import { createStaffAccount } from "../services/beAPIs";
 
+interface CreateStaffModalProps {
+  onStaffCreated?: () => void;
+}
 
-export default function CreateStaffModal() {
+export default function CreateStaffModal(
+  {
+    onStaffCreated
+  }: CreateStaffModalProps) {
   const { token } = useContext(AuthContext);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [form] = Form.useForm();
-  const [error, setError] = useState<string | null>(null); // Store API error
-  // Handle modal open/close
-  const showModal = () => {
+  const [error, setError] = useState<string | null>(null);
+  const [isFormValid, setIsFormValid] = useState(false);
+
+  // Check form validity when opening modal
+  const showModal = async () => {
     setError(null);
     setIsModalOpen(true);
-  }
-  const handleCancel = () => setIsModalOpen(false);
 
-  // Handle form submission
+    await form.validateFields().catch(() => { }); // Ensure validation runs on open
+    checkFormValidity();
+  };
+
+  const handleCancel = () => {
+    setIsModalOpen(false);
+    form.resetFields();
+    setIsFormValid(false);
+  };
+
+  // Check form validity
+  const checkFormValidity = () => {
+    const hasErrors = form.getFieldsError().some(({ errors }) => errors.length > 0);
+    setIsFormValid(form.isFieldsTouched(true) && !hasErrors);
+  };
+
   const handleCreate = async () => {
     try {
       const values = await form.validateFields();
-      console.log('values: '+values)
-      setError(null); // Clear previous errors
+      setError(null);
       const result = await createStaffAccount(values, token);
       if (result) {
         message.success("Tài khoản nhân viên đã được tạo thành công!");
         setIsModalOpen(false);
         form.resetFields();
+        setIsFormValid(false);
+        onStaffCreated?.();
       }
     } catch (error: any) {
-      setError(error.response?.data?.message || "Không thể tạo nhân viên. Vui lòng thử lại!"); // Set API error
+      setError(error.response?.data?.message || "Không thể tạo nhân viên. Vui lòng thử lại!");
     }
   };
 
@@ -47,8 +69,10 @@ export default function CreateStaffModal() {
         onCancel={handleCancel}
         footer={null} // Custom footer with a button
         className="rounded-lg"
+        centered
       >
-        <Form form={form} layout="vertical">
+        <Form form={form} layout="vertical"
+          onValuesChange={checkFormValidity}>
           {/* Name Field */}
           <Form.Item
             label="Tên đăng nhập"
@@ -104,7 +128,7 @@ export default function CreateStaffModal() {
           {error && <Alert message={error} type="error" className="mb-4" />}
           {/* Submit Button */}
           <Form.Item>
-            <Button type="primary" block onClick={handleCreate}>
+            <Button type="primary" block onClick={handleCreate} disabled={!isFormValid}>
               Tạo tài khoản
             </Button>
           </Form.Item>

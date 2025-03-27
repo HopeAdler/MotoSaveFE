@@ -1,16 +1,8 @@
 import { TableColumnsType, Tag } from "antd";
 import { formatDate } from "../utils/Utils";
 
-export interface StaffAccountCreatFields {
-  username: string,
-  password: string,
-  fullName: string,
-  phone: string,
-  roleId: number
-}
-
 export interface Staffs {
-  staffid: number,
+  staffid: string,
   username: string,
   fullname: string,
   email: string,
@@ -18,10 +10,10 @@ export interface Staffs {
   roleid: number,
   rolename: string,
   stationid: string,
-  stationname: number,
+  stationname: string,
   statusid: number,
-  statusname: string
-  createddate: string
+  statusname: string,
+  createddate: string,
   updateddate: string
 }
 export const staffColumns: TableColumnsType<Staffs> = [
