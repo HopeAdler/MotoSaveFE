@@ -1,0 +1,45 @@
+import { Tabs, TabsProps, Typography } from "antd";
+import DistanceRateList from "./DistanceRateList";
+import RepairCostPreviewList from "./RepairCostPreviewList";
+import ServicePackageList from "./ServicePackageList";
+
+const onChange = (key: string) => {
+  console.log("Selected Tab:", key);
+};
+
+const items: TabsProps["items"] = [
+  {
+    key: "1",
+    label: <span className="font-semibold text-lg">🚀 Gói dịch vụ</span>,
+    children: <ServicePackageList />,
+  },
+  {
+    key: "2",
+    label: <span className="font-semibold text-lg">📏 Tỉ giá khoảng cách</span>,
+    children: <DistanceRateList />,
+  },
+  {
+    key: "3",
+    label: <span className="font-semibold text-lg">🔧 Tổng quan giá sửa xe</span>,
+    children: <RepairCostPreviewList />,
+  },
+];
+
+export default function AllServices() {
+  return (
+    <div className="p-6 bg-blue-400 rounded-lg shadow-lg">
+      <Typography className="text-3xl font-bold mb-4 text-white">
+      🔧🏪 Quản lí dịch vụ
+      </Typography>
+
+      {/* Fancy Tabs */}
+      <Tabs
+        defaultActiveKey="1"
+        items={items}
+        onChange={onChange}
+        tabBarStyle={{ borderBottom: "2px solid #ddd" }}
+        className="bg-white p-4 rounded-lg shadow-md"
+      />
+    </div>
+  );
+}
