@@ -1,6 +1,9 @@
+import { Layout } from "antd";
 
 export default function Services() {
   return (
-    <div>Services</div>
+    <Layout>
+      Services
+    </Layout>
   )
 }
