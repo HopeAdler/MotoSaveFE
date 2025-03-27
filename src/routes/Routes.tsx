@@ -14,9 +14,6 @@ import Services from "../pages/guest/Services";
 import AdminPageLayout from "../pages/layouts/AdminLayout";
 import GuestLayout from "../pages/layouts/GuestLayout";
 import AllServices from "../pages/admin/services/AllServices";
-// import ServicePackageList from "../pages/admin/services/ServicePackageList";
-// import DistanceRateList from "../pages/admin/services/DistanceRateList";
-// import RepairCostPreviewList from "../pages/admin/services/RepairCostPreviewList";
 // import StationMap from "../pages/admin/stations/StationMap";
 
 export const routes = createBrowserRouter([
@@ -74,18 +71,6 @@ export const routes = createBrowserRouter([
           {
             index: true, element: <AllServices />
           },
-          // {
-          //   path: "servicePackages",
-          //   element: <ServicePackageList />,
-          // },
-          // {
-          //   path: "distanceRate",
-          //   element: <DistanceRateList />,
-          // },
-          // {
-          //   path: "repair",
-          //   element: <RepairCostPreviewList />,
-          // },
         ]
       },
       {
