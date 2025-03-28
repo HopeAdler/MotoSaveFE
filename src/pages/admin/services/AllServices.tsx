@@ -10,7 +10,7 @@ const onChange = (key: string) => {
 const items: TabsProps["items"] = [
   {
     key: "1",
-    label: <span className="font-semibold text-lg">🚀 Gói dịch vụ</span>,
+    label: <span className="font-semibold text-lg">📦 Gói dịch vụ</span>,
     children: <ServicePackageList />,
   },
   {
@@ -29,7 +29,7 @@ export default function AllServices() {
   return (
     <div className="p-6 bg-blue-400 rounded-lg shadow-lg">
       <Typography className="text-3xl font-bold mb-4 text-white">
-      🔧🏪 Quản lí dịch vụ
+      🛠️ 🏪 Quản lí dịch vụ
       </Typography>
 
       {/* Fancy Tabs */}

@@ -2,7 +2,7 @@ import { Empty, Table, TableProps } from "antd";
 import Title from "antd/es/typography/Title";
 import { useEffect, useState } from "react";
 import { stationColumns, Stations } from "../../../models/Stations";
-import { getAllStationss } from "../../../services/beAPIs";
+import { getAllStations } from "../../../services/beAPIs";
 
 type TablePaginationConfig = Exclude<
   TableProps<Stations>["pagination"],
@@ -24,7 +24,7 @@ export default function AllStations() {
   const fetchAllStations = async () => {
     try {
       setLoading(true);
-      const results = await getAllStationss();
+      const results = await getAllStations();
       setStations(results);
       setLoading(false);
       setTableParams((prev) => ({

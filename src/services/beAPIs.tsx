@@ -1,6 +1,6 @@
 import { message } from "antd";
 import axios from "axios";
-import { StaffAccountCreatFields, StaffAssignFields } from "../models/FormFields";
+import { ServicePackageUpdateFields, StaffAccountCreatFields, StaffAssignFields } from "../models/FormFields";
 
 export async function getAllStaffs(token: string): Promise<any> {
   try {
@@ -50,7 +50,7 @@ export async function getUnAssignedStaffs(token: string): Promise<any> {
   }
 }
 
-export async function getAllStationss(): Promise<any> {
+export async function getAllStations(): Promise<any> {
   try {
     const response = await axios.get(
       "https://motor-save-be.vercel.app/api/v1/stations"
@@ -59,6 +59,19 @@ export async function getAllStationss(): Promise<any> {
   } catch (error) {
     console.error("Error fetching staffs", error);
     message.error("Không thể lấy danh sách trạm sửa");
+    throw error;
+  }
+}
+
+export async function getServicePackages(): Promise<any> {
+  try {
+    const response = await axios.get(
+      "https://motor-save-be.vercel.app/api/v1/servicepackages"
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching service packages", error);
+    message.error("Không thể lấy các gói dịch vụ");
     throw error;
   }
 }
@@ -112,6 +125,27 @@ export async function changeStaffStation(
     const response = await axios.put(
       `https://motor-save-be.vercel.app/api/v1/staffinstations/${staffId}/station`,
       { stationId },
+      {
+        headers: { Authorization: "Bearer " + token },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    message.error("Không thể chuyển trạm cho nhân viên");
+    console.error("Error assigning staff", error);
+    throw error;
+  }
+}
+
+export async function updateServicePackage(
+  serPackId: string,
+  payload: ServicePackageUpdateFields,
+  token: string
+): Promise<any> {
+  try {
+    const response = await axios.put(
+      `https://motor-save-be.vercel.app/api/v1/servicepackages/${serPackId}`,
+      payload,
       {
         headers: { Authorization: "Bearer " + token },
       }

@@ -42,9 +42,9 @@ export default function GuestLayout() {
           ))}
         </Menu>
         <Button type="primary" size="large"
-          className="mt-2 w-1/8"
+          className="w-1/8"
           onClick={handleLogin}>
-          Login
+          Đăng nhập vào Hệ Thống Quản Lí
         </Button>
       </Header>
       <Content className="flex-grow px-12 mt-16 bg-slate-500 p-5">

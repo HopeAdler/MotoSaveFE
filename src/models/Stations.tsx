@@ -1,7 +1,7 @@
-import { Button, TableColumnsType } from "antd"
-import { formatDate } from "../utils/Utils"
 import { InfoCircleOutlined } from "@ant-design/icons";
+import { Button, TableColumnsType, Tooltip } from "antd";
 import { Link } from "react-router-dom";
+import { formatDate } from "../utils/Utils";
 export interface Stations {
   id: string,
   name: string,
@@ -28,17 +28,22 @@ export const stationColumns: TableColumnsType<Stations> = [
     title: 'Address',
     dataIndex: 'address',
     key: 'address',
+    render: (text: string) => (
+      <Tooltip title={text}>
+          {text.length > 50 ? `${text.substring(0, 50)}...` : text}
+      </Tooltip>
+    ),
   },
-  {
-    title: 'Longitude',
-    dataIndex: 'long',
-    key: 'long',
-  },
-  {
-    title: 'Latitude',
-    dataIndex: 'lat',
-    key: 'lat',
-  },
+  // {
+  //   title: 'Longitude',
+  //   dataIndex: 'long',
+  //   key: 'long',
+  // },
+  // {
+  //   title: 'Latitude',
+  //   dataIndex: 'lat',
+  //   key: 'lat',
+  // },
   {
     title: 'Created Date',
     dataIndex: 'createddate',

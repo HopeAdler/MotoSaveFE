@@ -11,4 +11,9 @@ export interface StaffAssignFields {
   stationId: string,
   staffId: string,
 }
+export interface ServicePackageUpdateFields {
+  name: string,
+  description: string,
+  rate: number,
+}
 

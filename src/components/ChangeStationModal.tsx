@@ -1,10 +1,10 @@
 import { RetweetOutlined } from "@ant-design/icons";
 import { Button, message, Modal, Select } from "antd";
 import { useContext, useEffect, useState } from "react";
+import AuthContext from "../context/AuthContext";
 import { StaffsInStations } from "../models/StaffsInStations";
 import { Stations } from "../models/Stations";
-import { changeStaffStation, getAllStationss } from "../services/beAPIs";
-import AuthContext from "../context/AuthContext";
+import { changeStaffStation, getAllStations } from "../services/beAPIs";
 
 interface ChangeStationModalProps {
   staff: StaffsInStations;
@@ -28,7 +28,7 @@ export default function ChangeStationModal(
   const fetchAllStations = async () => {
     try {
       setLoading(true);
-      const results = await getAllStationss();
+      const results = await getAllStations();
       setStations(results);
     } catch (error) {
       console.error("Error fetching stations:", error);
