@@ -1,6 +1,6 @@
 import { message } from "antd";
 import axios from "axios";
-import { ServicePackageUpdateFields, StaffAccountCreatFields, StaffAssignFields } from "../models/FormFields";
+import { RepairCostFields, ServicePackageUpdateFields, StaffAccountCreatFields, StaffAssignFields } from "../models/FormFields";
 
 export async function getAllStaffs(token: string): Promise<any> {
   try {
@@ -154,6 +154,47 @@ export async function updateServicePackage(
   } catch (error) {
     message.error("Không thể chuyển trạm cho nhân viên");
     console.error("Error assigning staff", error);
+    throw error;
+  }
+}
+
+export async function createRepairCost(
+  payload: RepairCostFields,
+  token: string
+): Promise<any> {
+  try {
+    const response = await axios.post(
+      "https://motor-save-be.vercel.app/api/v1/repaircostpreviews",
+      payload,
+      {
+        headers: { Authorization: "Bearer " + token },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    message.error("Không thể tạo repair cost");
+    console.error("Error creating repair cost", error);
+    throw error;
+  }
+}
+
+export async function updateRepairCost(
+  id: number | any,
+  payload: RepairCostFields,
+  token: string
+): Promise<any> {
+  try {
+    const response = await axios.put(
+      `https://motor-save-be.vercel.app/api/v1/repaircostpreviews/${id}`,
+      payload,
+      {
+        headers: { Authorization: "Bearer " + token },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    message.error("Không thể update repair cost");
+    console.error("Error updating repair cost", error);
     throw error;
   }
 }

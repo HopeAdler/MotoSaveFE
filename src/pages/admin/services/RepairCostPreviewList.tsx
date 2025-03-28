@@ -1,10 +1,140 @@
-import { Card } from "antd";
-import Typography from "antd/es/typography/Typography";
+import { Button, Card, Dropdown, Menu } from "antd";
+import { useContext, useEffect, useState } from "react";
+import { RepairCost } from "../../../models/RepairCost";
+import axios from "axios";
+import Table, { ColumnType } from "antd/es/table";
+import Title from "antd/es/typography/Title";
+import CreateRepairCostModal from "../../../components/CreateRepairCostModal";
+import UpdateRepairCostModal from "../../../components/UpdateRepairCostModal";
+import { deleteRepairCost } from "../../../components/DeleteRepairCostModal";
+import AuthContext from "../../../context/AuthContext";
 
-export default function RepairCostPreviewList() {
+const RepairCostPreviewList = () => {
+  const {token} = useContext(AuthContext);
+  const [repairCostList, setRepairCostList] = useState<RepairCost[]>([]);
+  const [selectedRepairCost, setSelectedRepairCost] =
+    useState<RepairCost | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+  const fetchRepairCosts = async () => {
+    try {
+      const response = await axios.get<RepairCost[]>(
+        "https://motor-save-be.vercel.app/api/v1/repaircostpreviews"
+      );
+      setRepairCostList(response.data);
+    } catch (error) {
+      console.error("Error fetching feedbacks:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+  useEffect(() => {
+    fetchRepairCosts();
+  }, []);
+  const handleUpdate = (repairCost: RepairCost) => {
+    setSelectedRepairCost(repairCost);
+  };
+
+  const handleUpdateModalClose = () => {
+    setSelectedRepairCost(null);
+    fetchRepairCosts(); // Refresh data after update
+  };
+
+  const handleDelete = (id: number) => {
+    deleteRepairCost(id, token, () => {
+      fetchRepairCosts(); // Refresh list after deletion
+    });
+  };
+  const columns: ColumnType<RepairCost>[] = [
+    {
+      title: "No.",
+      dataIndex: "no",
+      key: "no",
+      render: (_: any, __: any, index: number) => index + 1,
+    },
+    {
+      title: "Name",
+      dataIndex: "name",
+      key: "name",
+      render: (text: string) => (
+        <div>
+          <p className="font-semibold">{text}</p>
+        </div>
+      ),
+    },
+    {
+      title: "Description",
+      dataIndex: "description",
+      key: "description",
+      render: (text: string) => (
+        <p className="truncate max-w-xs">{text || "No description"}</p>
+      ),
+    },
+    {
+      title: "Min Cost",
+      dataIndex: "min",
+      key: "min",
+      render: (text: number) => (
+        <p className="truncate max-w-xs">{text.toLocaleString() + " VNĐ"}</p>
+      ),
+    },
+    {
+      title: "Max Cost",
+      dataIndex: "max",
+      key: "max",
+      render: (text: number) => (
+        <p className="truncate max-w-xs">{text.toLocaleString() + " VNĐ"}</p>
+      ),
+    },
+    {
+      title: "Action",
+      key: "action",
+      render: (_, record) => (
+        <Dropdown
+          overlay={
+            <Menu>
+              <Menu.Item key="update" onClick={() => handleUpdate(record)}>
+                Update
+              </Menu.Item>
+              <Menu.Item
+                key="delete"
+                onClick={() => handleDelete(record.id)}
+                danger
+              >
+                Delete
+              </Menu.Item>
+            </Menu>
+          }
+          trigger={["hover"]}
+        >
+          <Button className="border-none shadow-none text-gray-600 hover:text-gray-900">
+            ...
+          </Button>
+        </Dropdown>
+      ),
+    },
+  ];
   return (
-    <Card className="p-6 shadow-lg">
-      <Typography className="text-2xl font-bold mb-4">Repair</Typography>
-      <Typography className="text-lg">Handle repair service management.</Typography>
-    </Card>)
-}
+    <Card className="p-2 shadow-lg">
+      <div className="flex items-center justify-between">
+        <Title level={3} className="m-0">
+          Bảng giá sửa xe
+        </Title>
+        <CreateRepairCostModal onRepairCostCreated={fetchRepairCosts} />
+      </div>
+      <Table
+        columns={columns}
+        dataSource={repairCostList}
+        rowKey="id"
+        loading={loading}
+        pagination={{ pageSize: 5 }}
+        className="overflow-hidden rounded-lg"
+      />
+      <UpdateRepairCostModal
+        repairCost={selectedRepairCost}
+        onRepairCostUpdated={handleUpdateModalClose}
+        onClose={() => setSelectedRepairCost(null)}
+      />
+    </Card>
+  );
+};
+export default RepairCostPreviewList;
