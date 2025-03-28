@@ -214,10 +214,8 @@ const AdminDashboard = () => {
             <Card className={`shadow-lg rounded-xl border ${c.color}`}>
               <div className="flex justify-between items-center">
                 <div>
-                  <p className="text-sm font-medium">{c.today}</p>
-                  <Title level={5} className="m-0 text-x1 font-bold">
-                    {c.title}
-                  </Title>
+                  <p className="text-xs font-bold">{c.today}</p>
+                  <p className="text-sm font-semibold text-black">{c.title}</p>
                 </div>
                 <div className="p-2 bg-white rounded-full shadow-md">
                   {c.icon}

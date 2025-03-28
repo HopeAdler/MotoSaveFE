@@ -66,7 +66,7 @@ const RepairCostPreviewList = () => {
       dataIndex: "description",
       key: "description",
       render: (text: string) => (
-        <p className="truncate max-w-xs">{text || "No description"}</p>
+        <p>{text || "No description"}</p>
       ),
     },
     {
