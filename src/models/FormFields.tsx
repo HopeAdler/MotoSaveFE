@@ -23,3 +23,7 @@ export interface RepairCostFields {
   min: string,
   max: string,
 }
+export interface DistanceRateUpdateFields {
+  moneyperkm: number,
+}
+

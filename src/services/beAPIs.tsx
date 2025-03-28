@@ -1,6 +1,6 @@
 import { message } from "antd";
 import axios from "axios";
-import { RepairCostFields, ServicePackageUpdateFields, StaffAccountCreatFields, StaffAssignFields } from "../models/FormFields";
+import { DistanceRateUpdateFields, RepairCostFields, ServicePackageUpdateFields, StaffAccountCreatFields, StaffAssignFields } from "../models/FormFields";
 
 export async function getAllStaffs(token: string): Promise<any> {
   try {
@@ -76,6 +76,19 @@ export async function getServicePackages(): Promise<any> {
   }
 }
 
+export async function getDistanceRates(): Promise<any> {
+  try {
+    const response = await axios.get(
+      "https://motor-save-be.vercel.app/api/v1/distance"
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching distancerate", error);
+    message.error("Không thể lấy tỉ giá khoảng cách");
+    throw error;
+  }
+}
+
 export async function createStaffAccount(
   payload: StaffAccountCreatFields,
   token: string
@@ -133,6 +146,27 @@ export async function changeStaffStation(
   } catch (error) {
     message.error("Không thể chuyển trạm cho nhân viên");
     console.error("Error assigning staff", error);
+    throw error;
+  }
+}
+
+export async function updateDistanceRate(
+  disRateId: number,
+  payload: DistanceRateUpdateFields,
+  token: string
+): Promise<any> {
+  try {
+    const response = await axios.put(
+      `https://motor-save-be.vercel.app/api/v1/distance/${disRateId}`,
+      payload,
+      {
+        headers: { Authorization: "Bearer " + token },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    message.error("Không thể cập nhật giá tiền cho khoảng này");
+    console.error("Error updating distancerate", error);
     throw error;
   }
 }

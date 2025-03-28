@@ -1,6 +1,7 @@
 import { CheckOutlined, DropboxOutlined, EditOutlined } from "@ant-design/icons";
 import { Avatar, Button, Card, Input, List, message, Modal, Tag, Typography } from "antd";
 import { useContext, useEffect, useState } from "react";
+import Notes from "../../../components/Notes";
 import AuthContext from "../../../context/AuthContext";
 import { ServicePackages } from "../../../models/ServicePackages";
 import { getServicePackages, updateServicePackage } from "../../../services/beAPIs";
@@ -15,7 +16,11 @@ export default function ServicePackageList() {
   const [editedSerPack, setEditedSerPack] = useState<ServicePackages | null>(null);
   const [editedRates, setEditedRates] = useState<any>({});
   const [confirmLoading, setConfirmLoading] = useState<boolean>(false);
-
+  const noteData =
+    [
+      "Cập nhật tỉ giá cần xác nhận.",
+      "Tỉ giá hợp lệ từ 1.0 đến 1.5.",
+    ];
   const fetchServicePackages = async () => {
     try {
       setLoading(true);
@@ -39,7 +44,7 @@ export default function ServicePackageList() {
     Modal.confirm({
       centered: true,
       title: "Xác nhận cập nhật tỉ giá",
-      content: `Bạn có chắc muốn thay đổi tỉ giá thành ${editedRates[id]}x?`,
+      content: `Bạn có chắc muốn thay đổi tỉ giá thành ${editedRates[id]}x ?`,
       okText: "Xác nhận",
       cancelText: "Hủy",
       onOk: async () => {
@@ -79,10 +84,11 @@ export default function ServicePackageList() {
   }, [])
 
   return (
-    <Card className="p-6 shadow-lg">
+    <Card className="p-6 shadow-lg relative">
       <Title level={3} className="text-blue-600">📦 Các gói dịch vụ</Title>
       <Text type="secondary">Điều chỉnh tỉ giá dịch vụ ở đây.</Text>
-
+      {/* Floating Note */}
+      <Notes data={noteData} />
       <List
         className="mt-4"
         itemLayout="horizontal"
@@ -100,23 +106,35 @@ export default function ServicePackageList() {
                   <div className="mt-2 flex items-center space-x-2">
                     {/* Editable Rate Input */}
                     <div className="flex flex-col items-start">
-                      <Tag color="gold" className="w-40 flex items-center justify-between px-3 py-2 rounded-lg shadow-md text-base">
-                        <span className="text-black font-medium">Rate:</span>
+                      <Tag color="gold" className="w-40 flex flex-row items-center justify-between px-3 py-2 rounded-lg shadow-md text-base">
+                        <Typography className="font-semibold">Rate:</Typography>
                         {editedSerPack?.id === item.id ? (
                           <div className="flex items-center space-x-2">
                             <Input
                               required
-                              value={editedRates[item.id] !== null && editedRates[item.id] !== undefined ? editedRates[item.id] : ""}
+                              value={editedRates[item.id] ?? ""} // ✅ Keep as string
                               onChange={(e) => {
-                                const value = e.target.value === "" ? null : parseFloat(e.target.value);
-                                setEditedRates((prev: Record<string, number | null>) => ({ ...prev, [item.id]: value }));
+                                const rawValue = e.target.value;
+                                if (rawValue === "" || isNaN(Number(rawValue))) {
+                                  setEditedRates((prev : any) => ({ ...prev, [item.id]: null }));
+                                } else {
+                                  setEditedRates((prev : any) => ({ ...prev, [item.id]: rawValue })); // ✅ Store string
+                                }
+                              }}
+                              onBlur={() => {
+                                // ✅ Convert to float when input loses focus
+                                setEditedRates((prev : any) => ({
+                                  ...prev,
+                                  [item.id]: prev[item.id] !== null ? parseFloat(prev[item.id] as string) : null,
+                                }));
                               }}
                               className="w-16 border border-gray-300 rounded-md text-center"
                               type="number"
-                              step={0.01}
+                              step="0.01" // ✅ Allow more precise float inputs
                               max={1.5}
                               min={1}
                             />
+
                             <Button
                               type="primary"
                               size="small"
@@ -148,8 +166,6 @@ export default function ServicePackageList() {
                         </Text>
                       )}
                     </div>
-
-
                     <Tag color="cyan" className="text-lg">{formatDate(item.updateddate)}</Tag>
                   </div>
                 </div>
@@ -159,5 +175,6 @@ export default function ServicePackageList() {
         )}
       />
     </Card>
+
   );
 }

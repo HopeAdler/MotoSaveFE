@@ -8,3 +8,7 @@ export const formatDate = (dateString: string) => {
     minute: '2-digit'
   });
 };
+
+export const formatMoney = (amount: number) => {
+  return amount.toLocaleString("vi-VN").replace(/,/g, ".") + "VNĐ";
+}
