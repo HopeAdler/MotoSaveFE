@@ -122,6 +122,7 @@ export default function ServicePackageList() {
                               size="small"
                               shape="circle"
                               icon={<CheckOutlined />}
+                              loading={confirmLoading}
                               onClick={() => handleSave(item.id)}
                               disabled={editedRates[item.id] === null || editedRates[item.id] === "" || editedRates[item.id]! > 1.5 || editedRates[item.id]! < 1}
                             />
