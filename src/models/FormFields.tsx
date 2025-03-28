@@ -17,3 +17,9 @@ export interface ServicePackageUpdateFields {
   rate: number,
 }
 
+export interface RepairCostFields {
+  name: string,
+  description: string,
+  min: string,
+  max: string,
+}

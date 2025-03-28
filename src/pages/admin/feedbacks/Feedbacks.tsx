@@ -2,18 +2,7 @@ import { Rate } from "antd";
 import Table, { ColumnsType } from "antd/es/table";
 import axios from "axios";
 import { useEffect, useState } from "react";
-
-interface Feedback {
-  feedbackid: string;
-  rating: number;
-  comment: string;
-  createddate: string;
-  customername: string;
-  customerphone: string;
-  requestid: string;
-  requesttype: string;
-  servicepackagename: string;
-}
+import { Feedback } from "../../../models/Feedbacks";
 
 const Feedbacks = () => {
   const [feedbacks, setFeedbacks] = useState<Feedback[]>([]);
