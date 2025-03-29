@@ -7,6 +7,13 @@ export interface StaffAccountCreatFields {
   roleId: number
 }
 
+export interface StationCreateFields {
+  name: string,
+  address: string,
+  long: number,
+  lat: number,
+}
+
 export interface StaffAssignFields {
   stationId: string,
   staffId: string,

@@ -3,6 +3,7 @@ import Title from "antd/es/typography/Title";
 import { useEffect, useState } from "react";
 import { stationColumns, Stations } from "../../../models/Stations";
 import { getAllStations } from "../../../services/beAPIs";
+import CreateStationModal from "../../../components/CreateStationModal";
 
 type TablePaginationConfig = Exclude<
   TableProps<Stations>["pagination"],
@@ -57,6 +58,8 @@ export default function AllStations() {
     <div className="p-6">
       <div className="flex items-center justify-between">
         <Title level={3} className="m-0">Danh sách các trạm</Title>
+        <CreateStationModal onStationCreated={fetchAllStations} />
+
       </div>
 
       <Table<Stations>

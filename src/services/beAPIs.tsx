@@ -1,6 +1,6 @@
 import { message } from "antd";
 import axios from "axios";
-import { DistanceRateUpdateFields, RepairCostFields, ServicePackageUpdateFields, StaffAccountCreatFields, StaffAssignFields } from "../models/FormFields";
+import { DistanceRateUpdateFields, RepairCostFields, ServicePackageUpdateFields, StaffAccountCreatFields, StaffAssignFields, StationCreateFields } from "../models/FormFields";
 
 export async function getAllStaffs(token: string): Promise<any> {
   try {
@@ -105,6 +105,26 @@ export async function createStaffAccount(
   } catch (error) {
     message.error("Không thể tạo nhân viên");
     console.error("Error creating staff", error);
+    throw error;
+  }
+}
+
+export async function createStation(
+  payload: StationCreateFields,
+  token: string
+): Promise<any> {
+  try {
+    const response = await axios.post(
+      "https://motor-save-be.vercel.app/api/v1/stations",
+      payload,
+      {
+        headers: { Authorization: "Bearer " + token },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    message.error("Không thể tạo trạm mới");
+    console.error("Error creating station", error);
     throw error;
   }
 }
