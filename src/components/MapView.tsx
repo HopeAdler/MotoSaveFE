@@ -1,36 +1,84 @@
-import MapGL from "@goongmaps/goong-map-react";
-import React, { useState } from "react";
-import { goongMaptiles } from "../constraints/envConstraint";
-
-const GOONG_MAP_STYLE = "https://tiles.goong.io/assets/goong_map_dark.json"; // Better clarity
-
-const MapView: React.FC = () => {
-  const [viewport, setViewport] = useState<any>({
-    latitude: 37.8,
-    longitude: -122.4,
-    zoom: 14, // Adjusted zoom for better display
-    bearing: 0,
-    pitch: 30,
-  });
-
-  console.log("Goong API Key:", goongMaptiles); // Debugging API key
-
-  if (!goongMaptiles) {
-    return <div className="text-red-500 text-center">API Key is missing!</div>;
-  }
-
-  return (
-    <div className="w-[80vw]] h-[80vh]">
-      <MapGL
-        {...viewport}
-        width="100%"
-        height="100%"
-        mapStyle={GOONG_MAP_STYLE}
-        onViewportChange={(vp: any) => setViewport(vp)}
-        goongApiAccessToken={goongMaptiles}
-      />
-    </div>
-  );
+import ReactMapGL, { GeolocateControl, Marker } from '@goongmaps/goong-map-react';
+import { useEffect, useState } from 'react';
+import { goongMaptiles } from '../constraints/envConstraint';
+import { Stations } from '../models/Stations';
+import { getAllStations } from '../services/beAPIs';
+import { PushpinOutlined } from "@ant-design/icons";
+const geolocateControlStyle = {
+  right: 10,
+  top: 10
 };
 
-export default MapView;
+export default function MapView() {
+  const [stations, setStations] = useState<Stations[]>([]);
+  const [viewport, setViewport] = useState({
+    longitude: 106.725418, // Default center in Ho Chi Minh City
+    latitude: 10.752522,
+    zoom: 12,
+  });
+
+  // State to control map interactivity
+  const [isInteractive, setIsInteractive] = useState(false);
+
+  const handleMapClick = () => {
+    setIsInteractive(true);
+  };
+
+  // Fetch station data
+  useEffect(() => {
+    const fetchAllStation = async () => {
+      try {
+        const results = await getAllStations();
+        setStations(results);
+        console.log(results);
+      } catch (error) {
+        console.error("Failed to fetch stations", error);
+      }
+    };
+
+    fetchAllStation();
+  }, []);
+
+  return (
+    <div onClick={handleMapClick} className="cursor-pointer relative">
+      <ReactMapGL
+        {...viewport}
+        width="auto"
+        height="70vh"
+        className="border border-yellow-500"
+        onViewportChange={setViewport}
+        goongApiAccessToken={goongMaptiles}
+        dragPan={isInteractive}
+        scrollZoom={isInteractive}
+        doubleClickZoom={isInteractive}
+        touchZoom={isInteractive}
+      >
+        {/* User's current location */}
+        <GeolocateControl
+          style={geolocateControlStyle}
+          positionOptions={{ enableHighAccuracy: true }}
+          trackUserLocation={true}
+          auto
+        />
+
+        {/* Add Markers for stations */}
+        {stations.length > 0 && stations.map((station) => (
+          <Marker
+            key={station.id}
+            longitude={parseFloat(station.long.toString())} // Ensure it's a number
+            latitude={parseFloat(station.lat.toString())}  // Ensure it's a number
+            offsetLeft={-20}
+            offsetTop={-40}
+          >
+            <div className="relative">
+              <PushpinOutlined />
+              <span className="absolute top-10 left-1/2 transform -translate-x-1/2 bg-white px-2 py-1 rounded shadow">
+                {station.name}
+              </span>
+            </div>
+          </Marker>
+        ))}
+      </ReactMapGL>
+    </div>
+  );
+}
