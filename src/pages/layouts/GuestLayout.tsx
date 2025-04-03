@@ -5,14 +5,13 @@ import {
   InfoCircleOutlined,
   PayCircleOutlined,
 } from "@ant-design/icons";
-import { Button, Layout, Menu, Typography } from 'antd';
+import { Layout, Menu, Typography } from 'antd';
 import { SetStateAction, useState } from 'react';
-import { Link, Outlet, useNavigate } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
 const { Header, Footer, Content } = Layout;
 const { Title } = Typography;
 
 export default function GuestLayout() {
-  const navigate = useNavigate();
   const items = [
     { label: 'Trang chủ', icon: <HomeOutlined />, key: 'homepage', path: '/' },
     { label: 'Thông báo', icon: <FileTextOutlined />, key: 'news', path: '/news' },
@@ -25,9 +24,6 @@ export default function GuestLayout() {
     setCurrent(e.key);
   };
 
-  const handleLogin = () => {
-    navigate("/login");
-  };
   return (
     <Layout className="min-h-screen flex flex-col justify-between">
       <Header className="fixed w-full flex justify-between items-center align-middle px-12 bg-blue-800">
@@ -41,11 +37,6 @@ export default function GuestLayout() {
             </Menu.Item>
           ))}
         </Menu>
-        <Button type="primary" size="large"
-          className="w-1/8"
-          onClick={handleLogin}>
-          Đăng nhập vào Hệ Thống Quản Lí
-        </Button>
       </Header>
       <Content className="flex-grow px-12 mt-16 bg-slate-500 p-5">
         <Outlet />

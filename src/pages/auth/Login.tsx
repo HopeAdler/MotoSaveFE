@@ -67,7 +67,6 @@ const Login = () => {
         <figcaption className="relative mx-auto flex justify-between rounded-xl border border-white bg-white/60 py-4 px-6 shadow-lg shadow-black/5 backdrop-blur-lg">
           <div className="flex flex-col justify-center items-center">
             <Title level={2}>Trang đăng nhập dành cho Quản lí hệ thống</Title>
-            <p className="mt-2 text-slate-600">(Chỉ dành cho Admin)</p>
           </div>
         </figcaption>
       </figure>
