@@ -97,7 +97,7 @@ export default function CreateStationModal(
           <Form.Item
             label="Địa chỉ"
             name="address"
-            rules={[{ required: true, message: "Vui lòng địa chỉchỉ!" }]}
+            rules={[{ required: true, message: "Vui lòng nhập địa chỉ!" }]}
           >
             <Input placeholder="Nhập địa chỉ" />
           </Form.Item>
