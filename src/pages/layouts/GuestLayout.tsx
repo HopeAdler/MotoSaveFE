@@ -27,7 +27,7 @@ export default function GuestLayout() {
   return (
     <Layout className="min-h-screen flex flex-col justify-between">
       <Header className="fixed w-full flex justify-between items-center align-middle px-12 bg-blue-800">
-        <Title level={2} className='!text-white mx-10 mt-2'>MotorSave</Title>
+        <Title level={2} className='!text-white mx-10 mt-2'>Motor_Save</Title>
         <Menu mode="horizontal"
           selectedKeys={[current]} onClick={handleClick}
           className="flex flex-1 justify-start bg-inherit">
