@@ -9,7 +9,7 @@ import Login from "../pages/auth/Login";
 import ErrorPage from "../pages/error/ErrorPage";
 import AboutUs from "../pages/guest/AboutUs";
 import Homepage from "../pages/guest/Homepage";
-import News from "../pages/guest/News";
+// import News from "../pages/guest/News";
 import Services from "../pages/guest/Services";
 import AdminPageLayout from "../pages/layouts/AdminLayout";
 import GuestLayout from "../pages/layouts/GuestLayout";
@@ -26,7 +26,7 @@ export const routes = createBrowserRouter([
         index: true,
         element: <Homepage />,
       },
-      { path: "news", element: <News /> },
+      // { path: "news", element: <News /> },
       { path: "about-us", element: <AboutUs /> },
       { path: "services", element: <Services /> },
     ],

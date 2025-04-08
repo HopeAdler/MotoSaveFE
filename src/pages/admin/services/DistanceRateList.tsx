@@ -1,9 +1,13 @@
 import { Card, Empty, Table, Typography } from "antd";
-import { useEffect, useState } from "react";
+import Title from "antd/es/typography/Title";
+import { useContext, useEffect, useState } from "react";
+import AuthContext from "../../../context/AuthContext";
 import { distanceRateColumns, DistanceRates } from "../../../models/DistanceRate";
 import { getDistanceRates } from "../../../services/beAPIs";
 
 export default function DistanceRateList() {
+  const { token } = useContext(AuthContext);
+  const allowEdit = !!token; // `true` if user exists, otherwise `false`
   const [loading, setLoading] = useState<boolean>(true);
   const [distancerates, setDistanceRates] = useState<DistanceRates[]>([])
   const fetchDistanceRates = async () => {
@@ -24,13 +28,15 @@ export default function DistanceRateList() {
     <div>
       <Card className="p-6 shadow-lg relative">
         {/* Main Title */}
-        <Typography className="text-2xl font-bold mb-4">📏 Tính tiền dựa trên khoảng cách</Typography>
+        <Title level={3} className="text-blue-600">📏 Bảng giá dựa trên khoảng cách</Title>
+      {allowEdit && 
         <Typography className="text-lg">Quản lí số tiền trên mỗi km tại đây.</Typography>
+      }
       </Card>
 
       {/* Floating Note */}
       <Table<DistanceRates>
-        columns={distanceRateColumns(fetchDistanceRates)}
+        columns={distanceRateColumns(fetchDistanceRates, allowEdit)}
         dataSource={distancerates} // use filtered data here
         rowKey="id"
         bordered

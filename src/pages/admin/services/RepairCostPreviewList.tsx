@@ -10,7 +10,8 @@ import { deleteRepairCost } from "../../../components/DeleteRepairCostModal";
 import AuthContext from "../../../context/AuthContext";
 
 const RepairCostPreviewList = () => {
-  const {token} = useContext(AuthContext);
+  const { token } = useContext(AuthContext);
+  const allowEdit = !!token; // `true` if user exists, otherwise `false`
   const [repairCostList, setRepairCostList] = useState<RepairCost[]>([]);
   const [selectedRepairCost, setSelectedRepairCost] =
     useState<RepairCost | null>(null);
@@ -85,33 +86,37 @@ const RepairCostPreviewList = () => {
         <p className="truncate max-w-xs">{text.toLocaleString() + " VNĐ"}</p>
       ),
     },
-    {
-      title: "Action",
-      key: "action",
-      render: (_, record) => (
-        <Dropdown
-          overlay={
-            <Menu>
-              <Menu.Item key="update" onClick={() => handleUpdate(record)}>
-                Update
-              </Menu.Item>
-              <Menu.Item
-                key="delete"
-                onClick={() => handleDelete(record.id)}
-                danger
-              >
-                Delete
-              </Menu.Item>
-            </Menu>
-          }
-          trigger={["hover"]}
-        >
-          <Button className="border-none shadow-none text-gray-600 hover:text-gray-900">
-            ...
-          </Button>
-        </Dropdown>
-      ),
-    },
+    ...(allowEdit
+      ? [
+        {
+          title: "Action",
+          key: "action",
+          render: (_: any, _record: any) => (
+            <Dropdown
+              overlay={
+                <Menu>
+                  <Menu.Item key="update" onClick={() => handleUpdate(_record)}>
+                    Update
+                  </Menu.Item>
+                  <Menu.Item
+                    key="delete"
+                    onClick={() => handleDelete(_record.id)}
+                    danger
+                  >
+                    Delete
+                  </Menu.Item>
+                </Menu>
+              }
+              trigger={["hover"]}
+            >
+              <Button className="border-none shadow-none text-gray-600 hover:text-gray-900">
+                ...
+              </Button>
+            </Dropdown>
+          ),
+        },
+      ]
+      : []),
   ];
   return (
     <Card className="p-2 shadow-lg">
@@ -119,7 +124,9 @@ const RepairCostPreviewList = () => {
         <Title level={3} className="m-0">
           Bảng giá sửa xe
         </Title>
-        <CreateRepairCostModal onRepairCostCreated={fetchRepairCosts} />
+        {allowEdit &&
+          <CreateRepairCostModal onRepairCostCreated={fetchRepairCosts} />
+        }
       </div>
       <Table
         columns={columns}

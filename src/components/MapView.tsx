@@ -40,11 +40,11 @@ export default function MapView() {
   }, []);
 
   return (
-    <div onClick={handleMapClick} className="cursor-pointer relative">
+    <div onClick={handleMapClick} className="h-full cursor-pointer relative">
       <ReactMapGL
         {...viewport}
-        width="auto"
-        height="70vh"
+        height={'80vh'}
+        width={'100vw'}
         className="border border-yellow-500"
         onViewportChange={setViewport}
         goongApiAccessToken={goongMaptiles}
