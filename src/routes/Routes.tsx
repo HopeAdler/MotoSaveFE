@@ -14,6 +14,7 @@ import Services from "../pages/guest/Services";
 import AdminPageLayout from "../pages/layouts/AdminLayout";
 import GuestLayout from "../pages/layouts/GuestLayout";
 import AllServices from "../pages/admin/services/AllServices";
+import Payments from "../pages/admin/payments/Payments";
 // import StationMap from "../pages/admin/stations/StationMap";
 
 export const routes = createBrowserRouter([
@@ -76,6 +77,10 @@ export const routes = createBrowserRouter([
       {
         path: "feedbacks",
         element: <Feedbacks />,
+      },
+      {
+        path: "payments",
+        element: <Payments />,
       },
     ],
   },
