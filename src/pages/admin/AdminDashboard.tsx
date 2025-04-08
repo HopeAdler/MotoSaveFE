@@ -21,6 +21,7 @@ const AdminDashboard = () => {
   const [countFeedback, setCountFeedback] = useState(0);
   const [revenue, setRevenue] = useState(0);
   const [year, setYear] = useState("2025");
+  const [month, setMonth] = useState("4"); // Default to April
   const [requestData, setRequestData] = useState([]);
   const [revenueData, setRevenueData] = useState([]);
 
@@ -88,24 +89,26 @@ const AdminDashboard = () => {
       });
   };
   // Fetch total requests by month
-  const getTotalRequestsByMonth = async (selectedYear: string) => {
+  const getTotalRequestsByDate = async (
+    selectedYear: string,
+    selectedMonth: string
+  ) => {
     setLoading(true);
     try {
       const res = await axios.get(
-        `https://motor-save-be.vercel.app/api/v1/requests/count/${selectedYear}`,
+        `https://motor-save-be.vercel.app/api/v1/requests/count/total-by-date?year=${selectedYear}&month=${selectedMonth}`,
         {
           headers: { Authorization: "Bearer " + token },
         }
       );
 
-      // Convert API response into chart-friendly format
-      const formattedData = res.data.totalRequestsByMonth.map(
-        (item: { month: number; totalrequests: number }) => ({
-          month: new Date(0, item.month - 1).toLocaleString("en-US", {
-            month: "short",
-          }), // Convert month number to name
-          value: item.totalrequests,
-          year: selectedYear,
+      const formattedData = res.data.totalRequestsByDate.map(
+        (item: { date: string; totalrequests: number }) => ({
+          date: new Date(item.date).toLocaleDateString("en-GB", {
+            day: "2-digit",
+            month: "2-digit",
+          }), // format dd/MM
+          value: Number(item.totalrequests),
         })
       );
 
@@ -117,24 +120,26 @@ const AdminDashboard = () => {
   };
 
   // Fetch total revenue by month
-  const getTotalRevenueByMonth = async (selectedYear: string) => {
+  const getTotalRevenueByDate = async (
+    selectedYear: string,
+    selectedMonth: string
+  ) => {
     setLoading(true);
     try {
       const res = await axios.get(
-        `https://motor-save-be.vercel.app/api/v1/transactions/totalRevenue/${selectedYear}`,
+        `https://motor-save-be.vercel.app/api/v1/transactions/totalRevenue/total-by-date?year=${selectedYear}&month=${selectedMonth}`,
         {
           headers: { Authorization: "Bearer " + token },
         }
       );
 
-      // Convert API response into chart-friendly format
-      const formattedData = res.data.totalRevenueByMonth.map(
-        (item: { month: number; totalrevenue: number }) => ({
-          month: new Date(0, item.month - 1).toLocaleString("en-US", {
-            month: "short",
-          }),
+      const formattedData = res.data.totalRevenueByDate.map(
+        (item: { date: string; totalrevenue: number }) => ({
+          date: new Date(item.date).toLocaleDateString("en-GB", {
+            day: "2-digit",
+            month: "2-digit",
+          }), // format dd/MM
           revenue: item.totalrevenue,
-          year: selectedYear,
         })
       );
 
@@ -150,9 +155,9 @@ const AdminDashboard = () => {
     getTotalRequest();
     getTotalFeedback();
     getTotalRevenue();
-    getTotalRequestsByMonth(year);
-    getTotalRevenueByMonth(year);
-  }, [year]);
+    getTotalRequestsByDate(year, month);
+    getTotalRevenueByDate(year, month);
+  }, [year, month]);
 
   const count = [
     {
@@ -183,21 +188,22 @@ const AdminDashboard = () => {
 
   const columnConfig = {
     data: requestData,
-    xField: "month",
+    xField: "date",
     yField: "value",
-    columnWidthRatio: 0.8,
     color: "#1890ff",
   };
 
   const lineConfig = {
     data: revenueData,
-    xField: "month",
+    xField: "date",
     yField: "revenue",
     color: "#52c41a",
     point: {
-      size: 5,
+      size: 4,
       shape: "circle",
     },
+    xAxis: { title: { text: "Date" } },
+    yAxis: { title: { text: "Revenue (VND)" } },
   };
 
   if (loading) {
@@ -228,15 +234,24 @@ const AdminDashboard = () => {
       <Row gutter={[24, 24]} className="mt-8">
         <Col xs={24} lg={12}>
           <Card className="shadow-lg rounded-xl p-2">
-            <div className="flex justify-between items-center mb-4">
-              <Title level={3} className="text-gray-800">
-                Requests Per Month
-              </Title>
-              <Select value={year} onChange={setYear} className="w-32">
+            <Title level={3} className="text-gray-800">
+              Requests Per Month
+            </Title>
+            <div className="flex gap-2 items-center mb-4">
+              <Select value={year} onChange={setYear} className="w-28">
                 <Option value="2023">2023</Option>
                 <Option value="2024">2024</Option>
                 <Option value="2025">2025</Option>
                 <Option value="2026">2026</Option>
+              </Select>
+              <Select value={month} onChange={setMonth} className="w-24">
+                {Array.from({ length: 12 }, (_, i) => (
+                  <Option key={i + 1} value={(i + 1).toString()}>
+                    {new Date(0, i).toLocaleString("en-US", {
+                      month: "short",
+                    })}
+                  </Option>
+                ))}
               </Select>
             </div>
             <Column {...columnConfig} />
@@ -244,15 +259,24 @@ const AdminDashboard = () => {
         </Col>
         <Col xs={24} lg={12}>
           <Card className="shadow-lg rounded-xl p-2">
-            <div className="flex justify-between items-center mb-4">
-              <Title level={3} className="text-gray-800">
-                Revenue Per Month
-              </Title>
-              <Select value={year} onChange={setYear} className="w-32">
+            <Title level={3} className="text-gray-800">
+              Revenue Per Month
+            </Title>
+            <div className="flex gap-2 items-center mb-4">
+              <Select value={year} onChange={setYear} className="w-28">
                 <Option value="2023">2023</Option>
                 <Option value="2024">2024</Option>
                 <Option value="2025">2025</Option>
                 <Option value="2026">2026</Option>
+              </Select>
+              <Select value={month} onChange={setMonth} className="w-24">
+                {Array.from({ length: 12 }, (_, i) => (
+                  <Option key={i + 1} value={(i + 1).toString()}>
+                    {new Date(0, i).toLocaleString("en-US", {
+                      month: "short",
+                    })}
+                  </Option>
+                ))}
               </Select>
             </div>
             <Line {...lineConfig} />

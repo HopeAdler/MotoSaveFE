@@ -1,6 +1,7 @@
 
 import {
   BarChartOutlined,
+  MoneyCollectOutlined,
   OrderedListOutlined,
   StarOutlined,
   TeamOutlined
@@ -22,6 +23,8 @@ export default function AdminSideNav() {
             ? "3"
             : location.pathname === "/admin/feedbacks"
               ? "4"
+              : location.pathname === "/admin/payments"
+              ? "5"
               : "0";
 
   // Get the initial state of the submenus from sessionStorage
@@ -50,6 +53,7 @@ export default function AdminSideNav() {
     ]),
     getItem(<Link to="./services">Quản lí dịch vụ</Link>, "3", <OrderedListOutlined />, ""),
     getItem(<Link to="./feedbacks">Feedbacks của khách hàng</Link>, "4", <StarOutlined />, ""),
+    getItem(<Link to="./payments">Payments của khách hàng</Link>, "5", <MoneyCollectOutlined />, ""),
   ];
 
   return (
