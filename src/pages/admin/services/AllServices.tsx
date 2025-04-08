@@ -2,6 +2,7 @@ import { Tabs, TabsProps, Typography } from "antd";
 import DistanceRateList from "./DistanceRateList";
 import RepairCostPreviewList from "./RepairCostPreviewList";
 import ServicePackageList from "./ServicePackageList";
+import Notes from "../../../components/Notes";
 
 const onChange = (key: string) => {
   console.log("Selected Tab:", key);
@@ -26,11 +27,18 @@ const items: TabsProps["items"] = [
 ];
 
 export default function AllServices() {
+  const noteData =
+    [
+      "Cập nhật tỉ giá cần xác nhận.",
+      "Tỉ giá hợp lệ từ 1.0 đến 1.5.",
+    ];
   return (
     <div className="p-6 bg-blue-400 rounded-lg shadow-lg">
       <Typography className="text-3xl font-bold mb-4 text-white">
-      🛠️ 🏪 Quản lí dịch vụ
+        🛠️ 🏪 Quản lí dịch vụ
       </Typography>
+      {/* Floating Note */}
+      <Notes data={noteData} />
 
       {/* Fancy Tabs */}
       <Tabs

@@ -1,7 +1,6 @@
 import { CheckOutlined, DropboxOutlined, EditOutlined } from "@ant-design/icons";
 import { Avatar, Button, Card, Input, List, message, Modal, Tag, Typography } from "antd";
 import { useContext, useEffect, useState } from "react";
-import Notes from "../../../components/Notes";
 import AuthContext from "../../../context/AuthContext";
 import { ServicePackages } from "../../../models/ServicePackages";
 import { getServicePackages, updateServicePackage } from "../../../services/beAPIs";
@@ -16,11 +15,6 @@ export default function ServicePackageList() {
   const [editedSerPack, setEditedSerPack] = useState<ServicePackages | null>(null);
   const [editedRates, setEditedRates] = useState<any>({});
   const [confirmLoading, setConfirmLoading] = useState<boolean>(false);
-  const noteData =
-    [
-      "Cập nhật tỉ giá cần xác nhận.",
-      "Tỉ giá hợp lệ từ 1.0 đến 1.5.",
-    ];
   const fetchServicePackages = async () => {
     try {
       setLoading(true);
@@ -87,8 +81,6 @@ export default function ServicePackageList() {
     <Card className="p-6 shadow-lg relative">
       <Title level={3} className="text-blue-600">📦 Các gói dịch vụ</Title>
       <Text type="secondary">Điều chỉnh tỉ giá dịch vụ ở đây.</Text>
-      {/* Floating Note */}
-      <Notes data={noteData} />
       <List
         className="mt-4"
         itemLayout="horizontal"
@@ -116,14 +108,14 @@ export default function ServicePackageList() {
                               onChange={(e) => {
                                 const rawValue = e.target.value;
                                 if (rawValue === "" || isNaN(Number(rawValue))) {
-                                  setEditedRates((prev : any) => ({ ...prev, [item.id]: null }));
+                                  setEditedRates((prev: any) => ({ ...prev, [item.id]: null }));
                                 } else {
-                                  setEditedRates((prev : any) => ({ ...prev, [item.id]: rawValue })); // ✅ Store string
+                                  setEditedRates((prev: any) => ({ ...prev, [item.id]: rawValue })); // ✅ Store string
                                 }
                               }}
                               onBlur={() => {
                                 // ✅ Convert to float when input loses focus
-                                setEditedRates((prev : any) => ({
+                                setEditedRates((prev: any) => ({
                                   ...prev,
                                   [item.id]: prev[item.id] !== null ? parseFloat(prev[item.id] as string) : null,
                                 }));

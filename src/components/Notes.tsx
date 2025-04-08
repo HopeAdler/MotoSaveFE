@@ -2,13 +2,10 @@ import { DownOutlined, UpOutlined } from "@ant-design/icons";
 import { Card, Collapse, List, Typography } from "antd";
 import { useState } from "react";
 import FareCalculatingCard from "./FareCalculatingCard";
+import { NotesProps } from "../models/Notes";
 
 const { Title } = Typography;
 const { Panel } = Collapse;
-
-interface NotesProps {
-  data: string[];
-}
 
 export default function Notes({ data }: NotesProps) {
   const [isExpanded, setIsExpanded] = useState(true);
@@ -31,7 +28,7 @@ export default function Notes({ data }: NotesProps) {
             dataSource={data}
             renderItem={(item) => <List.Item className="text-yellow-900 font-bold">{item}</List.Item>}
           />
-          <FareCalculatingCard/>
+          <FareCalculatingCard />
         </Panel>
       </Collapse>
     </Card>
