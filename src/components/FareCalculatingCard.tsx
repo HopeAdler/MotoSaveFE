@@ -37,8 +37,8 @@ export default function FareCalculatingCard() {
                             <li><strong className="text-blue-700">d₁</strong>: First threshold (km, e.g., 1 km)</li>
                             <li><strong className="text-blue-700">d₂</strong>: Second threshold (km, e.g., 5 km)</li>
                             <li><strong className="text-blue-700">m₁</strong>: Flat fare when s ≤ d₁</li>
-                            <li><strong className="text-blue-700">m₂</strong>: Additional fare per km between d₁ and d₂</li>
-                            <li><strong className="text-blue-700">m₃</strong>: Additional fare per km beyond d₂</li>
+                            <li><strong className="text-blue-700">m₂</strong>: Fare per km between d₁ and d₂</li>
+                            <li><strong className="text-blue-700">m₃</strong>: Fare per km beyond d₂</li>
                         </ul>
                     </Card>
 
