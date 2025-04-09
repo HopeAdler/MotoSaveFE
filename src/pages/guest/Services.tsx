@@ -21,7 +21,7 @@ export default function Services() {
         </div>
         <div className="flex-1 items-start gap-6 mt-6">
           {/* Left column: inline cards */}
-          <FareCalculatingCard/>
+          <FareCalculatingCard />
         </div>
         <div className="flex-1 items-start gap-6 mt-6">
           <RepairCostPreviewList />
