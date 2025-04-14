@@ -4,7 +4,6 @@ import {
   MoneyCollectOutlined,
   OrderedListOutlined,
   StarOutlined,
-  TeamOutlined
 } from "@ant-design/icons";
 import { Menu } from "antd";
 import { useEffect, useState } from "react";
@@ -15,10 +14,10 @@ export default function AdminSideNav() {
   const selectedKey =
     location.pathname === "/admin"
       ? "1"
-      : location.pathname === "/admin/staffs"
-        ? "2.1"
-        : location.pathname === "/admin/stations"
-          ? "2.2"
+      // : location.pathname === "/admin/staffs"
+      //   ? "2.1"
+      //   : location.pathname === "/admin/stations"
+      //     ? "2.2"
           : location.pathname === "/admin/services"
             ? "3"
             : location.pathname === "/admin/feedbacks"
@@ -47,10 +46,10 @@ export default function AdminSideNav() {
 
   const items = [
     getItem(<Link to="/admin">Thống kê</Link>, "1", <BarChartOutlined />, ""),
-    getItem("Quản lý nhân sự", "2", <TeamOutlined />, [
-      getItem(<Link to="./staffs">Nhân viên</Link>, "2.1", "", ""),
-      getItem(<Link to="./stations">Các trạm sửa chữa</Link>, "2.2", "", ""),
-    ]),
+    // getItem("Quản lý nhân sự", "2", <TeamOutlined />, [
+    //   getItem(<Link to="./staffs">Nhân viên</Link>, "2.1", "", ""),
+    //   getItem(<Link to="./stations">Các trạm sửa chữa</Link>, "2.2", "", ""),
+    // ]),
     getItem(<Link to="./services">Quản lí dịch vụ</Link>, "3", <OrderedListOutlined />, ""),
     getItem(<Link to="./feedbacks">Feedbacks của khách hàng</Link>, "4", <StarOutlined />, ""),
     getItem(<Link to="./payments">Payments của khách hàng</Link>, "5", <MoneyCollectOutlined />, ""),

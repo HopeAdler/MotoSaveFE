@@ -2,9 +2,9 @@ import { createBrowserRouter } from "react-router-dom";
 import ProtectedRoute from "../config/ProtectedRoute";
 import AdminDashboard from "../pages/admin/AdminDashboard";
 import Feedbacks from "../pages/admin/feedbacks/Feedbacks";
-import AllStaffs from "../pages/admin/staffs/AllStaffs";
-import Stations from "../pages/admin/stations/AllStations";
-import StationDetails from "../pages/admin/stations/StationDetails";
+import AllStaffs from "../pages/manager/staffs/AllStaffs";
+import Stations from "../pages/manager/stations/AllStations";
+import StationDetails from "../pages/manager/stations/StationDetails";
 import Login from "../pages/auth/Login";
 import ErrorPage from "../pages/error/ErrorPage";
 import AboutUs from "../pages/guest/AboutUs";
@@ -15,6 +15,8 @@ import AdminPageLayout from "../pages/layouts/AdminLayout";
 import GuestLayout from "../pages/layouts/GuestLayout";
 import AllServices from "../pages/admin/services/AllServices";
 import Payments from "../pages/admin/payments/Payments";
+import ManagerPageLayout from "../pages/layouts/ManagerLayout";
+import ManagerDashboard from "../pages/manager/ManagerDashboard";
 // import StationMap from "../pages/admin/stations/StationMap";
 
 export const routes = createBrowserRouter([
@@ -46,33 +48,34 @@ export const routes = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       { index: true, element: <AdminDashboard /> },
-      {
-        path: "staffs",
-        element: <AllStaffs />,
-      },
-      {
-        path: "stations",
-        children: [
-          {
-            index: true, element: <Stations />
-          },
-          // {
-          //   path: "map",
-          //   element: <StationMap />,
-          // },
-          {
-            path: "stationDetails",
-            element: <StationDetails />,
-          },
-        ]
-      },
+      // {
+      //   path: "staffs",
+      //   element: <AllStaffs />,
+      // },
+      // {
+      //   path: "stations",
+      //   children: [
+      //     {
+      //       index: true, element: <Stations />
+      //     },
+      //     // {
+      //     //   path: "map",
+      //     //   element: <StationMap />,
+      //     // },
+      //     {
+      //       path: "stationDetails",
+      //       element: <StationDetails />,
+      //     },
+      //   ]
+      // },
       {
         path: "services",
         children: [
           {
-            index: true, element: <AllServices />
+            index: true,
+            element: <AllServices />,
           },
-        ]
+        ],
       },
       {
         path: "feedbacks",
@@ -81,6 +84,35 @@ export const routes = createBrowserRouter([
       {
         path: "payments",
         element: <Payments />,
+      },
+    ],
+  },
+  {
+    path: "/manager",
+    element: (
+      <ProtectedRoute requiredRoles={["Manager"]}>
+        <ManagerPageLayout />
+      </ProtectedRoute>
+    ),
+    errorElement: <ErrorPage />,
+    children: [
+      { index: true, element: <ManagerDashboard /> },
+      {
+        path: "staffs",
+        element: <AllStaffs />,
+      },
+      {
+        path: "stations",
+        children: [
+          {
+            index: true,
+            element: <Stations />,
+          },
+          {
+            path: "stationDetails",
+            element: <StationDetails />,
+          },
+        ],
       },
     ],
   },
