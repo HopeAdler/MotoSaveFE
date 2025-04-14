@@ -5,7 +5,7 @@ export const fareCalculations = [
         key: '1',
         condition: (
             <>
-                <span className="text-blue-600 font-semibold">s ≤ <span className="text-purple-700">d₁</span></span>
+                <span className="text-blue-700 font-semibold">s ≤ 1</span>
             </>
         ),
         formula: (
@@ -14,13 +14,30 @@ export const fareCalculations = [
             </>
         ),
         note: (
-            <span> Cước cố định cho <span className="text-purple-700">d₁</span> km đầu</span>
+            <span> Cước phí cố định từ 1km trở xuống
+            </span>
         )
     },
     {
         key: '2',
         condition: (
-            <span className="text-purple-700">d₁ &lt; s ≤ d₂</span>
+            <>
+                <span className="text-blue-700 font-semibold">1 &lt; s ≤ d₁</span>
+            </>
+        ),
+        formula: (
+            <>
+                F = <span className="text-purple-700">m₁</span> × s x <span className="text-blue-700">R</span>
+            </>
+        ),
+        note: (
+            <span> Cước phí cho mỗi km trong khoảng <span className="text-purple-700">d₁</span> km đầu</span>
+        )
+    },
+    {
+        key: '3',
+        condition: (
+            <span className="text-blue-700 font-semibold">d₁ &lt; s ≤ d₂</span>
         ),
         formula: (
             <>
@@ -34,10 +51,10 @@ export const fareCalculations = [
         )
     },
     {
-        key: '3',
+        key: '4',
         condition: (
             <>
-                <span className="text-purple-700">s &gt; d₂</span>
+                <span className="text-blue-700 font-semibold">s &gt; d₂</span>
             </>
         ),
         formula: (
