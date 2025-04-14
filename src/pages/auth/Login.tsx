@@ -39,6 +39,9 @@ const Login = () => {
         if (user.role === "Admin") {
           message.success("Login successful!");
           navigate("/admin");
+        } else if (user.role === "Manager") {
+          message.success("Login successful!");
+          navigate("/manager");
         } else {
           dispatch?.({
             type: "LOGIN_FAILURE",
