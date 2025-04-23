@@ -65,15 +65,6 @@ const Login = () => {
       className="h-screen w-full flex items-center justify-center relative bg-cover bg-center"
       style={{ backgroundImage: `url(${backgroundImg})` }}
     >
-      {/* Caption Section */}
-      <figure className="absolute top-12 flex">
-        <figcaption className="relative mx-auto flex justify-between rounded-xl border border-white bg-white/60 py-4 px-6 shadow-lg shadow-black/5 backdrop-blur-lg">
-          <div className="flex flex-col justify-center items-center">
-            <Title level={2}>Trang đăng nhập dành cho Quản lí hệ thống</Title>
-          </div>
-        </figcaption>
-      </figure>
-
       {/* Login Form */}
       <div className="w-full max-w-md p-8 rounded-xl bg-white/70 shadow-lg backdrop-blur-md">
         <Title className="text-center">Đăng nhập</Title>
