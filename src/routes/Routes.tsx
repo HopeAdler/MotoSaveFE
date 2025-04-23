@@ -17,6 +17,8 @@ import AllServices from "../pages/admin/services/AllServices";
 import Payments from "../pages/admin/payments/Payments";
 import ManagerPageLayout from "../pages/layouts/ManagerLayout";
 import ManagerDashboard from "../pages/manager/ManagerDashboard";
+import RequestLists from "../pages/manager/requests/RequestLists";
+import RequestDetail from "../pages/manager/requests/RequestDetail";
 // import StationMap from "../pages/admin/stations/StationMap";
 
 export const routes = createBrowserRouter([
@@ -113,6 +115,14 @@ export const routes = createBrowserRouter([
             element: <StationDetails />,
           },
         ],
+      },
+      {
+        path: "requests",
+        element: <RequestLists />,
+      },
+      {
+        path: "requests/detail/:id",
+        element: <RequestDetail />,
       },
     ],
   },
