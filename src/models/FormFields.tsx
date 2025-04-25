@@ -30,6 +30,13 @@ export interface RepairCostFields {
   min: string,
   max: string,
 }
+
+export interface AccessoryFields {
+  partcategoryid: number,
+  brandId: number,
+  name: string,
+  cost: number,
+}
 export interface DistanceRateUpdateFields {
   moneyperkm: number,
 }
