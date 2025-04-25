@@ -1,6 +1,7 @@
 import { message } from "antd";
 import axios from "axios";
-import { DistanceRateUpdateFields, RepairCostFields, ServicePackageUpdateFields, StaffAccountCreatFields, StaffAssignFields, StationCreateFields } from "../models/FormFields";
+import { AccessoryFields, DistanceRateUpdateFields, RepairCostFields, ServicePackageUpdateFields, StaffAccountCreatFields, StaffAssignFields, StationCreateFields } from "../models/FormFields";
+import { Accessory } from "../models/Accessories";
 
 export async function getAllStaffs(token: string): Promise<any> {
   try {
@@ -59,6 +60,30 @@ export async function getAllStations(): Promise<any> {
   } catch (error) {
     console.error("Error fetching staffs", error);
     message.error("Không thể lấy danh sách trạm sửa");
+    throw error;
+  }
+}
+
+export async function getAllBrand(): Promise<any> {
+  try {
+    const response = await axios.get(
+      "https://motor-save-be.vercel.app/api/v1/brands"
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching brands", error);
+    throw error;
+  }
+}
+
+export async function getAllPartCateories(): Promise<any> {
+  try {
+    const response = await axios.get(
+      "https://motor-save-be.vercel.app/api/v1/partcategories"
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching partcategories", error);
     throw error;
   }
 }
@@ -249,6 +274,47 @@ export async function updateRepairCost(
   } catch (error) {
     message.error("Không thể update repair cost");
     console.error("Error updating repair cost", error);
+    throw error;
+  }
+}
+
+export async function createAccessory(
+  payload: AccessoryFields,
+  token: string
+): Promise<any> {
+  try {
+    const response = await axios.post(
+      "https://motor-save-be.vercel.app/api/v1/accessories",
+      payload,
+      {
+        headers: { Authorization: "Bearer " + token },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    message.error("Không thể tạo accessory");
+    console.error("Error creating accessory", error);
+    throw error;
+  }
+}
+
+export async function updateAccessory(
+  id: number | any,
+  payload: Accessory,
+  token: string
+): Promise<any> {
+  try {
+    const response = await axios.put(
+      `https://motor-save-be.vercel.app/api/v1/accessories/${id}`,
+      payload,
+      {
+        headers: { Authorization: "Bearer " + token },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    message.error("Không thể update accessory");
+    console.error("Error updating accessory", error);
     throw error;
   }
 }

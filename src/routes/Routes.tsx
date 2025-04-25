@@ -19,6 +19,7 @@ import ManagerPageLayout from "../pages/layouts/ManagerLayout";
 import ManagerDashboard from "../pages/manager/ManagerDashboard";
 import RequestLists from "../pages/manager/requests/RequestLists";
 import RequestDetail from "../pages/manager/requests/RequestDetail";
+import RepairServices from "../pages/manager/repair/RepairServices";
 // import StationMap from "../pages/admin/stations/StationMap";
 
 export const routes = createBrowserRouter([
@@ -123,6 +124,10 @@ export const routes = createBrowserRouter([
       {
         path: "requests/detail/:id",
         element: <RequestDetail />,
+      },
+      {
+        path: "repairServices",
+        element: <RepairServices />,
       },
     ],
   },

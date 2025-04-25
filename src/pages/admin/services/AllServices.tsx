@@ -1,6 +1,6 @@
 import { Tabs, TabsProps, Typography } from "antd";
 import DistanceRateList from "./DistanceRateList";
-import RepairCostPreviewList from "./RepairCostPreviewList";
+// import RepairCostPreviewList from "./RepairCostPreviewList";
 import ServicePackageList from "./ServicePackageList";
 import Notes from "../../../components/Notes";
 
@@ -19,11 +19,11 @@ const items: TabsProps["items"] = [
     label: <span className="font-semibold text-lg">📏 Tỉ giá khoảng cách</span>,
     children: <DistanceRateList />,
   },
-  {
-    key: "3",
-    label: <span className="font-semibold text-lg">🔧 Tổng quan giá sửa xe</span>,
-    children: <RepairCostPreviewList />,
-  },
+  // {
+  //   key: "3",
+  //   label: <span className="font-semibold text-lg">🔧 Tổng quan giá sửa xe</span>,
+  //   children: <RepairCostPreviewList />,
+  // },
 ];
 
 export default function AllServices() {

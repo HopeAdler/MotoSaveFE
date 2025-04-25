@@ -2,6 +2,7 @@ import {
   BarChartOutlined,
   TeamOutlined,
   FileTextOutlined,
+  ToolOutlined
 } from "@ant-design/icons";
 import { Menu } from "antd";
 import { useEffect, useState } from "react";
@@ -18,6 +19,8 @@ export default function ManagerSideNav() {
       ? "2.2"
       : location.pathname === "/manager/requests"
       ? "3"
+      : location.pathname === "/manager/repairServices"
+      ? "4"
       : "0";
 
   // Get the initial state of the submenus from sessionStorage
@@ -48,6 +51,12 @@ export default function ManagerSideNav() {
       <Link to="./requests">Requests của khách hàng</Link>,
       "3",
       <FileTextOutlined />,
+      ""
+    ),
+    getItem(
+      <Link to="./repairServices">Quản lí sửa chữa xe</Link>,
+      "4",
+      <ToolOutlined />,
       ""
     ),
   ];

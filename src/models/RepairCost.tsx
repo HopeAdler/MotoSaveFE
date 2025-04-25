@@ -4,4 +4,7 @@ export interface RepairCost {
     description: string,
     min: number,
     max: number,
+    wage: number,
+    rate: number,
+    repairpackageid: number,
 }
