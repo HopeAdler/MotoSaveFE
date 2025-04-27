@@ -94,14 +94,23 @@ const RepairCostPreviewList = () => {
           <p className="truncate max-w-xs">{text}</p>
         ),
       },
-      // {
-      //   title: "Package",
-      //   dataIndex: "repairpackageid",
-      //   key: "repairpackageid",
-      //   render: (text: number) => (
-      //     <p className="truncate max-w-xs">{text}</p>
-      //   ),
-      // },
+      {
+        title: "Package",
+        dataIndex: "repairpackagename",
+        key: "repairpackagename",
+        filters: [
+          {
+            text: "Basic",
+            value: "Basic",
+          },
+          {
+            text: "Addons",
+            value: "Addons",
+          },
+        ],
+        onFilter: (value: any, record) => record.repairpackagename.indexOf(value) === 0,
+        render: (text) => <p className="truncate max-w-xs">{text}</p>,
+      },
     ...(allowEdit
       ? [
         {
