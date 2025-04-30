@@ -85,9 +85,9 @@ export default function ChangeDistanceRateModal(
           /> VNĐ
         </div>
         {
-          (editedMoney === null || editedMoney === "" || editedMoney > 20000 || editedMoney < 10000) ? (
+          (editedMoney === null || editedMoney === "" || editedMoney > 60000 || editedMoney < 40000) ? (
             <Text type="danger" className="text-red-500 mt-1 text-sm">
-              {editedMoney === null || editedMoney === "" ? "Money is required" : "Money must be between 10.000 and 20.000"}
+              {editedMoney === null || editedMoney === "" ? "Money is required" : "Money must be between 40.000 and 60.000"}
             </Text>
           ) : (
             <Button
