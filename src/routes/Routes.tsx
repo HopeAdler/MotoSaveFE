@@ -2,7 +2,6 @@ import { createBrowserRouter } from "react-router-dom";
 import ProtectedRoute from "../config/ProtectedRoute";
 import AdminDashboard from "../pages/admin/AdminDashboard";
 import Feedbacks from "../pages/admin/feedbacks/Feedbacks";
-import AllStaffs from "../pages/manager/staffs/AllStaffs";
 import Stations from "../pages/manager/stations/AllStations";
 import StationDetails from "../pages/manager/stations/StationDetails";
 import Login from "../pages/auth/Login";
@@ -20,6 +19,7 @@ import ManagerDashboard from "../pages/manager/ManagerDashboard";
 import RequestLists from "../pages/manager/requests/RequestLists";
 import RequestDetail from "../pages/manager/requests/RequestDetail";
 import RepairServices from "../pages/manager/repair/RepairServices";
+import StaffPerformance from "../pages/manager/staffs/StaffPerformance";
 // import StationMap from "../pages/admin/stations/StationMap";
 
 export const routes = createBrowserRouter([
@@ -102,7 +102,7 @@ export const routes = createBrowserRouter([
       { index: true, element: <ManagerDashboard /> },
       {
         path: "staffs",
-        element: <AllStaffs />,
+        element: <StaffPerformance />,
       },
       {
         path: "stations",

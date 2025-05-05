@@ -46,8 +46,8 @@ const RequestLists = () => {
       key: "customername",
       render: (text, record) => (
         <div>
-          <p className="font-semibold">{text}</p>
-          <p className="text-gray-500 text-sm">{record.customerphone}</p>
+          <p className="font-semibold">{text ? text : record.receivername}</p>
+          <p className="text-gray-500 text-sm">{record.customerphone ? record.customerphone : record.receiverphone}</p>
         </div>
       ),
     },

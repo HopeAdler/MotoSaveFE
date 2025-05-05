@@ -43,10 +43,10 @@ const RequestDetail = () => {
       <Card title="User Information" className="mb-3">
         <Descriptions layout="vertical" bordered>
           <Descriptions.Item label="Customer Name">
-            {requestDetail.customername}
+            {requestDetail.customername ? requestDetail.customername : requestDetail.receivername}
           </Descriptions.Item>
           <Descriptions.Item label="Customer Phone">
-            {requestDetail.customerphone}
+            {requestDetail.customerphone ? requestDetail.customerphone : requestDetail.receiverphone}
           </Descriptions.Item>
         </Descriptions>
       </Card>
@@ -117,7 +117,7 @@ const RequestDetail = () => {
           </Descriptions.Item>
         </Descriptions>
       </Card>
-      {requestDetail.totalprice && (
+      {requestDetail.totalprice && requestDetail.paymentstatus && (
         <Card title="Payment Information" className="mb-3">
           <Descriptions layout="vertical" bordered>
             <Descriptions.Item label="Total Price">
