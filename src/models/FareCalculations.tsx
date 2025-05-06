@@ -11,7 +11,7 @@ export const fareCalculations = [
         F = <span className="text-purple-700">m₁</span> × <span className="text-blue-700">R</span>
       </>
     ),
-    note: <span>Tổng phí cho quãng đường dưới 1km</span>,
+    note: <span>Tổng phí cho quãng đường từ 1km trở xuống</span>,
   },
   {
     key: '2',
@@ -23,7 +23,7 @@ export const fareCalculations = [
         F = <span className="text-purple-700">m₁</span> + (s − 1) × <span className="text-purple-700">m₂</span> × <span className="text-blue-700">R</span>
       </>
     ),
-    note: <span>Tổng phí cho khoảng cách trong vòng 1km và <span className="text-purple-700">d₁</span></span>,
+    note: <span>Tổng phí cho quãng đường trong khoảng 1km và <span className="text-purple-700">d₁</span></span>,
   },
   {
     key: '3',
@@ -39,7 +39,7 @@ export const fareCalculations = [
         {')'} × <span className="text-blue-700">R</span>
       </>
     ),
-    note: <span>Tổng phí cho khoảng cách giữa <span className="text-purple-700">d₁</span> và <span className="text-purple-700">d₂</span></span>,
+    note: <span>Tổng phí cho quãng đường trong khoảng <span className="text-purple-700">d₁</span> và <span className="text-purple-700">d₂</span></span>,
   },
   {
     key: '4',
@@ -56,7 +56,7 @@ export const fareCalculations = [
         {')'} × <span className="text-blue-700">R</span>
       </>
     ),
-    note: <span>Tổng phí cho khoảng cách vượt quá <span className="text-purple-700">d₂</span></span>,
+    note: <span>Tổng phí cho quãng đường vượt quá <span className="text-purple-700">d₂</span></span>,
   },
 ];
 
