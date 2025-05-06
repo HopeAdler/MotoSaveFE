@@ -1,8 +1,8 @@
 import { Tabs, TabsProps, Typography } from "antd";
 import DistanceRateList from "./DistanceRateList";
 // import RepairCostPreviewList from "./RepairCostPreviewList";
+import AdminNotes from "../../../components/AdminNotes";
 import ServicePackageList from "./ServicePackageList";
-import Notes from "../../../components/Notes";
 
 const onChange = (key: string) => {
   console.log("Selected Tab:", key);
@@ -38,7 +38,7 @@ export default function AllServices() {
         🛠️ 🏪 Quản lí dịch vụ
       </Typography>
       {/* Floating Note */}
-      <Notes data={noteData} />
+      <AdminNotes data={noteData} />
 
       {/* Fancy Tabs */}
       <Tabs

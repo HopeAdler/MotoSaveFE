@@ -4,6 +4,7 @@ import axios from "axios";
 export const deleteRepairCost = async (id: number, token: string, onSuccess: () => void) => {
   Modal.confirm({
     title: "Delete Confirm",
+    centered: true,
     content: "Are you sure delete this repair cost?",
     okText: "Delete",
     cancelText: "Cancel",

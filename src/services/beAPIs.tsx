@@ -75,6 +75,17 @@ export async function getAllBrand(): Promise<any> {
     throw error;
   }
 }
+export async function getAllPartCategories(): Promise<any> {
+  try {
+    const response = await axios.get(
+      "https://motor-save-be.vercel.app/api/v1/partcategories"
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching partcategories", error);
+    throw error;
+  }
+}
 
 export async function getAllPartCateories(): Promise<any> {
   try {

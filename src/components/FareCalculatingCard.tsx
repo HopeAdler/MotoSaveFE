@@ -5,7 +5,7 @@ import { useState } from "react";
 import { fareCalculationColumns, fareCalculations } from "../models/FareCalculations";
 
 export default function FareCalculatingCard() {
-    const [collapsed, setCollapsed] = useState(false);
+    const [collapsed, setCollapsed] = useState(true);
 
     return (
         <Card
@@ -16,27 +16,27 @@ export default function FareCalculatingCard() {
                     className="w-full flex items-center justify-between text-left text-lg font-semibold text-blue-800 hover:text-blue-900 transition focus:outline-none"
                 >
                     <div className="flex items-center gap-2">
-                        <CodeOutlined /> Distance Fare Calculation
+                        <CodeOutlined /> Cách tính tiền dựa trên khoảng cách
                     </div>
-                    {collapsed ? <DownOutlined /> : <UpOutlined />}
+                    {collapsed ? <UpOutlined /> : <DownOutlined />}
                 </button>
             }
         >
-            {!collapsed && (
+            {collapsed && (
                 <div className="flex flex-col md:flex-row gap-8 text-gray-800 font-mono text-sm md:text-base">
                     {/* Left Column – Definitions */}
                     <div className="md:w-1/3 space-y-4">
-                        <Title level={4} className="!mb-2 text-blue-700">Symbol Definitions</Title>
+                        <Title level={4} className="!mb-2 text-blue-700">Chú thích</Title>
                         <ul className="list-disc list-inside space-y-2 leading-relaxed">
-                            <li><strong className="text-blue-700">R</strong>: Package service's multiplier rate</li>
-                            <li><strong className="text-blue-700">s</strong>: Distance traveled (in kilometers)</li>
-                            <li><strong className="text-blue-700">F</strong>: Total fare</li>
-                            <li><strong className="text-blue-700">d₁</strong>: First threshold (e.g., 5 km)</li>
-                            <li><strong className="text-blue-700">d₂</strong>: Second threshold (e.g., 10 km)</li>
-                            <li><strong className="text-blue-700">m₁</strong>: Fixed fare for the first 1 km</li>
-                            <li><strong className="text-blue-700">m₂</strong>: Fare per km from 1 km to d₁</li>
-                            <li><strong className="text-blue-700">m₃</strong>: Fare per km from d₁ to d₂</li>
-                            <li><strong className="text-blue-700">m₄</strong>: Fare per km beyond d₂</li>
+                            <li><strong className="text-blue-700">R</strong>: Tỉ giá (theo gói dịch vụ)</li>
+                            <li><strong className="text-blue-700">s</strong>: Quãng đường di chuyển (km)</li>
+                            <li><strong className="text-blue-700">F</strong>: Tổng chi phí</li>
+                            <li><strong className="text-blue-700">d₁</strong>: Mốc thứ nhất (vd: 5km)</li>
+                            <li><strong className="text-blue-700">d₂</strong>: Mốc thứ hai (vd: 10km)</li>
+                            <li><strong className="text-blue-700">m₁</strong>: Giá cố định trong vòng 1 km</li>
+                            <li><strong className="text-blue-700">m₂</strong>: Phí trên mỗi km từ 1 km đến d₁</li>
+                            <li><strong className="text-blue-700">m₃</strong>: Phí trên mỗi km từ d₁ to d₂</li>
+                            <li><strong className="text-blue-700">m₄</strong>: Phí trên mỗi km khi vượt quá d₂</li>
                         </ul>
 
                     </div>
@@ -54,7 +54,7 @@ export default function FareCalculatingCard() {
                         </div>
 
                         <div>
-                            <Title level={4} className="!mb-2 text-blue-700">Examples</Title>
+                            <Title level={4} className="!mb-2 text-blue-700">Ví dụ</Title>
                             <ul className="list-disc list-inside space-y-2 leading-relaxed">
                                 <li>
                                     <span className="font-semibold text-gray-700">

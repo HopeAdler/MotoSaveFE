@@ -27,13 +27,15 @@ export default function GuestLayout() {
       <Header className="fixed top-0 w-full z-50 flex justify-between items-center px-12 bg-blue-800 h-16">
         <Title level={2} className='!text-white mx-10 mt-2'>Motor_Save</Title>
         <Menu
+          theme="dark"
           mode="horizontal"
           selectedKeys={[current]}
           onClick={handleClick}
           className="flex flex-1 justify-start bg-inherit"
         >
           {items.map(item => (
-            <Menu.Item key={item.key} className="text-white" icon={item.icon}>
+            <Menu.Item key={item.key} className="text-lg"
+              icon={item.icon}>
               <Link to={item.path}>{item.label}</Link>
             </Menu.Item>
           ))}

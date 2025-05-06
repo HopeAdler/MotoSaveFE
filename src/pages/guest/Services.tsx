@@ -9,7 +9,7 @@ export default function Services() {
   return (
     <Layout className="max-h-[90vh] bg-gradient-to-br from-green-500 via-blue to-blue-500 flex items-center">
       <div className="max-w-full w-full p-6 h-[85vh] overflow-y-auto">
-        <Title level={2} className="text-start mb-8">🧾 Fare Calculation Information</Title>
+        <Title level={2} className="text-start mb-8">🧾 Thông tin báo giá</Title>
         {/* Right column: DistanceRateList */}
         <div className="flex flex-row rounded-2xl shadow-md bg-white hover:shadow-xl transition-shadow duration-300 p-4 gap-4">
           <div className="flex-1 flex flex-col justify-between">
