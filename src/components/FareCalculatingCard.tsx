@@ -35,7 +35,7 @@ export default function FareCalculatingCard() {
                             <li><strong className="text-blue-700">d₂</strong>: Mốc thứ hai (vd: 10km)</li>
                             <li><strong className="text-blue-700">m₁</strong>: Giá cố định trong vòng 1 km</li>
                             <li><strong className="text-blue-700">m₂</strong>: Phí trên mỗi km từ 1 km đến d₁</li>
-                            <li><strong className="text-blue-700">m₃</strong>: Phí trên mỗi km từ d₁ to d₂</li>
+                            <li><strong className="text-blue-700">m₃</strong>: Phí trên mỗi km từ d₁ đến d₂</li>
                             <li><strong className="text-blue-700">m₄</strong>: Phí trên mỗi km khi vượt quá d₂</li>
                         </ul>
 
