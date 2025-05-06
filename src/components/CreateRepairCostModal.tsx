@@ -59,6 +59,7 @@ export default function CreateRepairCostModal({
 
   const handleCreate = async () => {
     try {
+      console.log(isFormValid)
       const values = await form.validateFields();
       const parsedValues = {
         ...values,

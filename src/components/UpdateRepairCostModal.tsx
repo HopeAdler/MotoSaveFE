@@ -60,6 +60,7 @@ export default function UpdateRepairCostModal({
 
   const handleUpdate = async () => {
     try {
+      console.log(isFormValid)
       const values = await form.validateFields();
       setError(null);
 
