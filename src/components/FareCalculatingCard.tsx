@@ -9,7 +9,7 @@ export default function FareCalculatingCard() {
 
     return (
         <Card
-            className="flex-1 rounded-2xl shadow-md bg-white hover:shadow-xl transition-shadow duration-300"
+            className="flex-1 rounded-2xl hover:shadow-xl transition-shadow duration-300"
             title={
                 <button
                     onClick={() => setCollapsed(!collapsed)}

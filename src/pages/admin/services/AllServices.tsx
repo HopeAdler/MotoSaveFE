@@ -8,6 +8,12 @@ const onChange = (key: string) => {
   console.log("Selected Tab:", key);
 };
 
+const noteData =
+    [
+      "Cập nhật tỉ giá cần xác nhận.",
+      "Tỉ giá hợp lệ từ 1.0 đến 1.5.",
+    ];
+
 const items: TabsProps["items"] = [
   {
     key: "1",
@@ -19,26 +25,21 @@ const items: TabsProps["items"] = [
     label: <span className="font-semibold text-lg">📏 Tỉ giá khoảng cách</span>,
     children: <DistanceRateList />,
   },
-  // {
-  //   key: "3",
-  //   label: <span className="font-semibold text-lg">🔧 Tổng quan giá sửa xe</span>,
-  //   children: <RepairCostPreviewList />,
-  // },
+  {
+    key: "3",
+    label: <span className="font-semibold text-lg">🔧 Ghi chú</span>,
+    children: <AdminNotes data={noteData}/>,
+  },
 ];
 
 export default function AllServices() {
-  const noteData =
-    [
-      "Cập nhật tỉ giá cần xác nhận.",
-      "Tỉ giá hợp lệ từ 1.0 đến 1.5.",
-    ];
   return (
     <div className="p-6 bg-blue-400 rounded-lg shadow-lg">
       <Typography className="text-3xl font-bold mb-4 text-white">
         🛠️ 🏪 Quản lí dịch vụ
       </Typography>
       {/* Floating Note */}
-      <AdminNotes data={noteData} />
+      {/* <AdminNotes data={noteData} /> */}
 
       {/* Fancy Tabs */}
       <Tabs

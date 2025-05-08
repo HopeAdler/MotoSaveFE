@@ -68,6 +68,7 @@ const RepairCostPreviewList = () => {
       title: "Min Cost",
       dataIndex: "min",
       key: "min",
+      sorter: (a, b) => a.min - b.min,
       render: (text: number) => (
         <p className="truncate max-w-xs">{text.toLocaleString() + " VNĐ"}</p>
       ),
@@ -76,6 +77,7 @@ const RepairCostPreviewList = () => {
       title: "Max Cost",
       dataIndex: "max",
       key: "max",
+      sorter: (a, b) => a.max - b.max,
       render: (text: number) => (
         <p className="truncate max-w-xs">{text.toLocaleString() + " VNĐ"}</p>
       ),
@@ -84,6 +86,7 @@ const RepairCostPreviewList = () => {
       title: "Wage",
       dataIndex: "wage",
       key: "wage",
+      sorter: (a, b) => a.wage - b.wage,
       render: (text: number) => (
         <p className="truncate max-w-xs">{text.toLocaleString() + " VNĐ"}</p>
       ),
@@ -92,6 +95,7 @@ const RepairCostPreviewList = () => {
       title: "Rate",
       dataIndex: "rate",
       key: "rate",
+      sorter: (a, b) => a.rate - b.rate,
       render: (text: number) => <p className="truncate max-w-xs">{text}</p>,
     },
     {
