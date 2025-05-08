@@ -21,7 +21,7 @@ const ManagerDashboard = () => {
   const [countFeedback, setCountFeedback] = useState(0);
   const [revenue, setRevenue] = useState(0);
   const [year, setYear] = useState("2025");
-  const [month, setMonth] = useState("4"); // Default to April
+  const [month, setMonth] = useState("5");
   const [requestData, setRequestData] = useState([]);
   const [revenueData, setRevenueData] = useState([]);
 
