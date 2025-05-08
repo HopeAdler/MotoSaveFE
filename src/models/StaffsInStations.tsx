@@ -24,19 +24,9 @@ export const staffsInStationColumn = (fetchStaffsInStation: () => void): TableCo
     key: 'username',
   },
   {
-    title: 'Email',
-    dataIndex: 'email',
-    key: 'email',
-  },
-  {
     title: 'Full Name',
     dataIndex: 'fullname',
     key: 'fullname',
-  },
-  {
-    title: 'Gender',
-    dataIndex: 'gender',
-    key: 'gender',
   },
   {
     title: 'Phone',
@@ -47,6 +37,18 @@ export const staffsInStationColumn = (fetchStaffsInStation: () => void): TableCo
     title: 'Role Name',
     dataIndex: 'rolename',
     key: 'rolename',
+    filters: [
+      {
+        text: "Driver",
+        value: "Driver",
+      },
+      {
+        text: "Mechanic",
+        value: "Mechanic",
+      }
+    ],
+    onFilter: (value: any, record) => record.rolename.indexOf(value) === 0,
+    render: (text) => <span>{text}</span>,
   },
   {
     title: 'Action',

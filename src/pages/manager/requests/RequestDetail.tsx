@@ -2,13 +2,28 @@ import { useContext, useEffect, useState } from "react";
 import AuthContext from "../../../context/AuthContext";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import { Card, Descriptions, Spin, Tag } from "antd";
+import { Card, Descriptions, Divider, Spin, Tag } from "antd";
+
+interface RepairQuote {
+  id: string;
+  requestdetailid: string;
+  repairpackagename: string;
+  repairname: string;
+  detail: string;
+  partcategoryname: string;
+  accessoryname: string;
+  cost: number;
+  wagerate: number;
+  wage: number;
+  total: number;
+}
 
 const RequestDetail = () => {
   const { token } = useContext(AuthContext);
   const { id } = useParams();
   const [loading, setLoading] = useState(true);
   const [requestDetail, setRequestDetail] = useState<any>(null);
+  const [repairQuotes, setRepairQuotes] = useState<RepairQuote[]>([]);
 
   useEffect(() => {
     const fetchDetail = async () => {
@@ -30,6 +45,27 @@ const RequestDetail = () => {
     fetchDetail();
   }, [id]);
 
+  const fetchRepairQuote = async () => {
+    try {
+      const response = await axios.get<RepairQuote[]>(
+        `https://motor-save-be.vercel.app/api/v1/repairquotes/requestdetail/${requestDetail?.requestdetailid}`
+      );
+      setRepairQuotes(response.data);
+    } catch (error) {
+      console.error("Error fetching repair quotes:", error);
+    }
+  };
+
+  useEffect(() => {
+    if (
+      requestDetail?.requesttype === "Sửa xe" &&
+      requestDetail?.requeststatus !== "Pending" &&
+      requestDetail?.requeststatus !== "Inspecting"
+    ) {
+      fetchRepairQuote();
+    }
+  }, [requestDetail?.requeststatus]);
+
   if (loading) {
     return (
       <div className="flex justify-center items-center h-96">
@@ -43,10 +79,14 @@ const RequestDetail = () => {
       <Card title="User Information" className="mb-3">
         <Descriptions layout="vertical" bordered>
           <Descriptions.Item label="Customer Name">
-            {requestDetail.customername ? requestDetail.customername : requestDetail.receivername}
+            {requestDetail.customername
+              ? requestDetail.customername
+              : requestDetail.receivername}
           </Descriptions.Item>
           <Descriptions.Item label="Customer Phone">
-            {requestDetail.customerphone ? requestDetail.customerphone : requestDetail.receiverphone}
+            {requestDetail.customerphone
+              ? requestDetail.customerphone
+              : requestDetail.receiverphone}
           </Descriptions.Item>
         </Descriptions>
       </Card>
@@ -121,7 +161,9 @@ const RequestDetail = () => {
         <Card title="Payment Information" className="mb-3">
           <Descriptions layout="vertical" bordered>
             <Descriptions.Item label="Total Price">
-              {requestDetail.totalprice.toLocaleString()} VNĐ
+            <span className="bg-pink-100 text-black text-base font-bold px-3 py-1 rounded-full">
+                {(requestDetail?.totalprice || 0).toLocaleString()} VNĐ
+              </span>
             </Descriptions.Item>
             <Descriptions.Item label="Payment Method">
               {requestDetail.paymentmethod}
@@ -136,6 +178,95 @@ const RequestDetail = () => {
           </Descriptions>
         </Card>
       )}
+      {requestDetail?.requeststatus !== "Pending" &&
+        requestDetail?.requeststatus !== "Inspecting" &&
+        requestDetail?.requesttype === "Sửa xe" && (
+          <Card className="mb-3">
+            <div className="mb-4">
+              <h3 className="text-lg font-bold text-gray-900 mb-2">
+                Repair Vehicle Quote
+              </h3>
+              {repairQuotes.filter((q) => q.repairpackagename === "Basic")
+                .length > 0 ? (
+                repairQuotes
+                  .filter((q) => q.repairpackagename === "Basic")
+                  .map((item) => (
+                    <div
+                      key={item.id}
+                      className="flex justify-between items-center py-2 border-b"
+                    >
+                      <div className="font-semibold text-[#1a3148]">
+                        {item.repairname}
+                      </div>
+                      <span className="bg-blue-100 text-blue-800 text-sm font-semibold px-3 py-1 rounded-full">
+                        {item.wage.toLocaleString()} VNĐ
+                      </span>
+                    </div>
+                  ))
+              ) : (
+                <div className="text-gray-500 italic">
+                  No repair quote yet
+                </div>
+              )}
+            </div>
+
+            <div className="mb-4">
+              <h3 className="text-lg font-bold text-gray-900 mb-2">
+                Accessory List
+              </h3>
+              {repairQuotes.filter((q) => q.repairpackagename === "Addons")
+                .length > 0 ? (
+                repairQuotes
+                  .filter((q) => q.repairpackagename === "Addons")
+                  .map((item) => (
+                    <div
+                      key={item.id}
+                      className="flex justify-between items-start py-2 border-b"
+                    >
+                      <div>
+                        <div className="font-semibold text-[#1a3148]">
+                          {item.accessoryname || item.repairname}
+                        </div>
+                        <div className="text-gray-500">
+                          {item.partcategoryname}
+                        </div>
+                        <div className="text-xs">
+                          Wage: {item.wage.toLocaleString()} VNĐ
+                        </div>
+                      </div>
+                      <span className="bg-blue-100 text-blue-800 text-sm font-semibold px-3 py-1 rounded-full">
+                        {item.cost.toLocaleString()} VNĐ
+                      </span>
+                    </div>
+                  ))
+              ) : (
+                <div className="text-gray-500 italic">No accessory yet</div>
+              )}
+            </div>
+
+            <div className="flex justify-between items-center border-t pt-4">
+              <span className="font-semibold text-base text-gray-900">
+                Total wage
+              </span>
+              <span className="bg-green-100 text-green-800 text-sm font-semibold px-3 py-1 rounded-full">
+                {repairQuotes
+                  .filter((q) => q.repairpackagename !== "Basic")
+                  .reduce((sum, q) => sum + (q.wage || 0), 0)
+                  .toLocaleString()}{" "}
+                VNĐ
+              </span>
+            </div>
+
+            <Divider className="mt-2" />
+
+            <div className="flex justify-between items-center mt-4 pt-3">
+              <span className="text-lg font-bold text-gray-900">Total Repair Quote Price</span>
+              <span className="bg-pink-100 text-black text-base font-bold px-3 py-1 rounded-full">
+                {(requestDetail?.totalprice || 0).toLocaleString()} VNĐ
+              </span>
+            </div>
+          </Card>
+        )}
     </div>
   );
 };

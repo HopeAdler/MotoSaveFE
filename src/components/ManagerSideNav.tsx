@@ -44,7 +44,7 @@ export default function ManagerSideNav() {
   const items = [
     getItem(<Link to="/manager">Thống kê</Link>, "1", <BarChartOutlined />, ""),
     getItem("Quản lý nhân sự", "2", <TeamOutlined />, [
-      getItem(<Link to="./staffs">Nhân viên</Link>, "2.1", "", ""),
+      getItem(<Link to="./staffs">Thống kê Nhân viên</Link>, "2.1", "", ""),
       getItem(<Link to="./stations">Các trạm sửa chữa</Link>, "2.2", "", ""),
     ]),
     getItem(

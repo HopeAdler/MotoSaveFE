@@ -13,6 +13,14 @@ export const formatMoney = (amount: number) => {
   return amount.toLocaleString("vi-VN").replace(/,/g, ".") + "VNĐ";
 }
 
+export const removeVietnameseTones = (str: string) => {
+  return str
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/đ/g, "d")
+    .replace(/Đ/g, "D");
+};
+
 export const formatCoordinate = (value: string, isLongitude: boolean): string => {
   if (!value) return "";
   let num = parseFloat(value);
