@@ -70,12 +70,20 @@ const Payments = () => {
       title: "Total Amount",
       dataIndex: "totalamount",
       key: "totalamount",
-      render: (text) => <span>{text}</span>,
+      sorter: (a, b) => a.totalamount - b.totalamount,
+      render: (text) => <span>{text.toLocaleString() + " VNĐ"}</span>,
     },
     {
       title: "Payment Status",
       dataIndex: "paymentstatus",
       key: "paymentstatus",
+      filters: Array.from(new Set(payments.map((a) => a.paymentstatus))).map(
+        (name) => ({
+          text: name,
+          value: name,
+        })
+      ),
+      onFilter: (value, record) => record.paymentstatus === value,
       render: (text) => {
         const color = text === "Success" ? "green" : "volcano";
         return <Tag color={color}>{text.toUpperCase()}</Tag>;
@@ -103,7 +111,7 @@ const Payments = () => {
       render: (text) => <span>{text}</span>,
     },
     {
-      title: "Date",
+      title: "Created Date",
       dataIndex: "updateddate",
       key: "updateddate",
       render: (date) => new Date(date).toLocaleDateString(),

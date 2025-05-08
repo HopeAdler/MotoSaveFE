@@ -98,6 +98,13 @@ const RequestLists = () => {
         title: "Status",
         dataIndex: "requeststatus",
         key: "requeststatus",
+        filters: Array.from(new Set(requests.map((a) => a.requeststatus))).map(
+          (name) => ({
+            text: name,
+            value: name,
+          })
+        ),
+        onFilter: (value, record) => record.requeststatus === value,
         render: (text) => {
           const color = text === "Done" ? "green" : "volcano";
           return <Tag color={color}>{text.toUpperCase()}</Tag>;

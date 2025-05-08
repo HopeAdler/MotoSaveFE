@@ -66,6 +66,7 @@ const Feedbacks = () => {
       title: "Rating",
       dataIndex: "rating",
       key: "rating",
+      sorter: (a, b) => a.rating - b.rating,
       render: (rating) => (
         <Rate allowHalf disabled defaultValue={rating} />
       ),
@@ -77,7 +78,7 @@ const Feedbacks = () => {
       render: (text) => <p className="truncate max-w-xs">{text || "No comment"}</p>,
     },
     {
-      title: "Date",
+      title: "Created Date",
       dataIndex: "createddate",
       key: "createddate",
       render: (date) => new Date(date).toLocaleDateString(),
