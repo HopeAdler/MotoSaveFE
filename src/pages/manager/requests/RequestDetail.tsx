@@ -146,6 +146,11 @@ const RequestDetail = () => {
               <Tag color="volcano">{requestDetail.requeststatus}</Tag>
             )}
           </Descriptions.Item>
+          {requestDetail.note && (
+            <Descriptions.Item label="Reason">
+              {requestDetail.note}
+            </Descriptions.Item>
+          )}
           <Descriptions.Item label="Created Date">
             {new Date(requestDetail.createddate).toLocaleDateString("vi-VN", {
               day: "2-digit",
