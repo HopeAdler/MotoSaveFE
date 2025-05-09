@@ -107,7 +107,7 @@ export default function CreateAccessoryModal({
           <Form form={form} layout="vertical" onValuesChange={checkFormValidity}>
             <Form.Item
               label="Accessory Name"
-              name="accessoryname"
+              name="name"
               rules={[{ required: true, message: "Please input accessory name!" }]}
             >
               <Input placeholder="Input name" />

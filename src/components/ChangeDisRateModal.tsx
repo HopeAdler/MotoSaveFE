@@ -42,7 +42,7 @@ export default function ChangeDistanceRateModal(
       message.success('Cập nhật giá tiền thành công');
       onDisRateChanged && onDisRateChanged();
     } catch (error) {
-      console.error("Error updating station:", error);
+      console.error("Error updating distance rate:", error);
     } finally {
       setLoading(false);
     }

@@ -29,11 +29,6 @@ export const staffColumns: TableColumnsType<Staffs> = [
     key: 'username',
   },
   {
-    title: 'Email',
-    dataIndex: 'email',
-    key: 'email',
-  },
-  {
     title: 'Phone',
     dataIndex: 'phone',
     key: 'phone',

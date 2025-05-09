@@ -20,6 +20,7 @@ import RequestLists from "../pages/manager/requests/RequestLists";
 import RequestDetail from "../pages/manager/requests/RequestDetail";
 import RepairServices from "../pages/manager/repair/RepairServices";
 import StaffPerformance from "../pages/manager/staffs/StaffPerformance";
+import AllStaffs from "../pages/admin/staffs/AllStaffs";
 // import StationMap from "../pages/admin/stations/StationMap";
 
 export const routes = createBrowserRouter([
@@ -51,10 +52,10 @@ export const routes = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       { index: true, element: <AdminDashboard /> },
-      // {
-      //   path: "staffs",
-      //   element: <AllStaffs />,
-      // },
+      {
+        path: "staffs",
+        element: <AllStaffs />,
+      },
       // {
       //   path: "stations",
       //   children: [

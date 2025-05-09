@@ -176,7 +176,7 @@ export default function UpdateRepairCostModal({
         </Form.Item>
 
         <Form.Item
-          label="Tỉ lệ lương"
+          label="Phần trăm công thợ"
           name="rate"
           rules={[
             {
