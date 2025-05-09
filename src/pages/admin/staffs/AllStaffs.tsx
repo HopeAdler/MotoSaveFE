@@ -107,7 +107,7 @@ export default function AllStaffs() {
 
       <Table<Staffs>
         columns={modifiedColumns}
-        dataSource={filteredStaffs} // use filtered data here
+        dataSource={filteredStaffs} // use filtered data hereee
         rowKey="staffid"
         bordered
         rowClassName={(_, index) =>
